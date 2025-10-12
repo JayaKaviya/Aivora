@@ -1,5 +1,5 @@
-import react from "./react.svg";
+import aivora from "./aivora.png";
 
 export default {
-  react
+ aivora
 };

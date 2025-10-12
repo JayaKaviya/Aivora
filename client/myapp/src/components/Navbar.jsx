@@ -8,7 +8,7 @@ function Navbar() {
     const navigate=useNavigate();
   return (
     <div className='navbar'>
-        <img src={assets.react} alt="logo" className='navbar-logo' onClick={()=>navigate('/')}/>
+        <img src={assets.aivora} alt="logo" className='navbar-logo' onClick={()=>navigate('/')}/>
         <button className='getbtn'>Get Started<ArrowRight className='icon-small' /></button>
     </div>
   )
