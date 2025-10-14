@@ -10,8 +10,8 @@ passport.use(
       scope : ['profile', 'email']
     },
     function(accessToken, refreshToken, profile, callback){
-      // profile contains user info from Google
-      // In real app, you could save user info in DB here
+      // profile contains user info(photo,name,etc) from Google
+      // In app, you could save user info in DB here
       callback(null, profile);
     }
   )

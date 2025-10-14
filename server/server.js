@@ -6,6 +6,8 @@ const express = require('express');
 const cors = require('cors');
 // Authentication
 const passport = require('passport');
+const passportSetup=require('./passport')
+const authRoute=require('./router/auth')
 // Session management
 const cookieSession = require('cookie-session'); 
 
@@ -29,6 +31,8 @@ app.use( cors({
     methods: "GET, POST, PUT, DELETE",
     credentials : true
 })) 
+
+app.use("/auth", authRoute);
 
 const port=process.env.PORT || 8000; 
 app.listen(port,()=>{
