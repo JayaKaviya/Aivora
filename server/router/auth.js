@@ -14,7 +14,7 @@ router.get('/google/callback',
 ) 
 
 router.get('/login/success',(req,res)=>{
-   if(res.user){
+   if(req.user){
     res.status(200).json({
         error:false,
         message:"Succsessfully Logged In",
@@ -22,7 +22,7 @@ router.get('/login/success',(req,res)=>{
     })
    } 
    else{
-    res.status(403).status({ error : true,message:"Not Authorized"})
+    res.status(403).json({ error : true,message:"Not Authorized"})
    }
 });
 
@@ -37,6 +37,12 @@ router.get('/login/failed',(req,res)=>{
 
 
 router.get('/logout',(req,res)=>{
-    req.logout();
+    req.logout(function(err) {
+    if (err) 
+        { return next(err);
+     }
     res.redirect(process.env.CLIENT_URL);
+  });
 })
+
+module.exports = router;

@@ -10,17 +10,29 @@ const passportSetup=require('./passport')
 const authRoute=require('./router/auth')
 // Session management
 const cookieSession = require('cookie-session'); 
-
+const session = require('express-session');
 const app=express(); 
+// app.use(
+//     cookieSession(
+//         {
+//             name: "session",
+//             keys: [process.env.SESSION_KEY],
+//             maxAge: 24*60*60*100 //24 hrs
+//         }
+//     )
+// ) 
+
 app.use(
-    cookieSession(
-        {
-            name: "session",
-            keys: [process.env.SESSION_KEY],
-            maxAge: 24*60*60*100 //24 hrs
+    session({
+        secret: process.env.SESSION_KEY, // your session key
+        resave: false,                    // don’t save session if unmodified
+        saveUninitialized: false,         // don’t create session until something stored
+        cookie: {
+            maxAge: 24 * 60 * 60 * 1000 , // 24 hours
+             sameSite: "lax"
         }
-    )
-) 
+    })
+);
 
 app.use(passport.initialize());
 app.use(passport.session()); 
