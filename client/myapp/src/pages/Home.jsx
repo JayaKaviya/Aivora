@@ -36,7 +36,7 @@ function Home(userDetails) {
               </div>
               <div className="right">
                     <h2 className="form_heading">Profile</h2> 
-                     <img  className="profile_img" src={user.picture} alt='profile'/>
+                    <img  className="profile_img" src={user.picture} alt='profile'/>
                     <input type="text" defaultValue={user.name} className="input" placeholder="Username"/>
                     <input type="text"  defaultValue={user.email} className="input" placeholder="Email"/>
 

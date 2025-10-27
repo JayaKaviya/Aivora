@@ -1,48 +1,26 @@
-const router=require('express').Router();
-const passport = require('passport');
+const router = require('express').Router();
+const {
+  googleAuth,
+  googleCallback,
+  loginSuccess,
+  loginFailed,
+  logout,
+  signup,
+} = require('../controllers/authController');
 
 
-router.get('/google',
-    passport.authenticate('google',['profile','email'])
-) 
+// Google OAuth
+router.get('/google', googleAuth);
+router.get('/google/callback', googleCallback);
 
-router.get('/google/callback',
-    passport.authenticate('google',{
-        successRedirect:process.env.CLIENT_URL,
-        failureRedirect:"/login/failed"
-    })
-) 
+// Login success/failure
+router.get('/login/success', loginSuccess);
+router.get('/login/failed', loginFailed);
 
-router.get('/login/success',(req,res)=>{
-   if(req.user){
-    res.status(200).json({
-        error:false,
-        message:"Succsessfully Logged In",
-        user:req.user
-    })
-   } 
-   else{
-    res.status(403).json({ error : true,message:"Not Authorized"})
-   }
-});
+// Logout
+router.get('/logout', logout);
 
-router.get('/login/failed',(req,res)=>{
-    res.status(401).json({
-        error:true,
-        message:"Login failure"
-    })
-}
-
-)
-
-
-router.get('/logout',(req,res)=>{
-    req.logout(function(err) {
-    if (err) 
-        { return next(err);
-     }
-    res.redirect(process.env.CLIENT_URL);
-  });
-})
+// Email/Password signup
+router.post('/signup', signup);
 
 module.exports = router;
