@@ -17,23 +17,23 @@ import ReviewResume from './pages/ReviewResume';
 import WriteArticle from './pages/WriteArticle';
 
 function App() {
-  	const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
 	const getUser = async () => {
 		try {
-			const url =`${import.meta.env.VITE_API_URL}/auth/login/success`;
-			const { data } = await axios.get(url, { withCredentials: true });
-			if (data.user && data.user._json) {
-            setUser(data.user._json); 
-      }
+        const url =`${import.meta.env.VITE_API_URL}/auth/login/success`;
+        const { data } = await axios.get(url, { withCredentials: true });
+        if (data.user && data.user._json) {
+              setUser(data.user._json); 
+        }
 		} catch (err) {
-		if (err.response && err.response.status === 403) {
-      // ✅ 403 just means "not logged in" — ignore it silently
-      console.log("User not logged in yet");
-    } else {
-      console.error("Unexpected error fetching user:", err);
-    }
-		}
+        if (err.response && err.response.status === 403) {
+          // ✅ 403 just means "not logged in" — ignore it silently
+          console.log("User not logged in yet");
+        } else {
+          console.error("Unexpected error fetching user:", err);
+        }
+      }
 	};
 
 	useEffect(() => {
