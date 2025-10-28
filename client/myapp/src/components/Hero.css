@@ -110,6 +110,7 @@
 
 .button-secondary {
   background-color: white;
+  width: 198px;
   color: inherit;
   padding: 0.75rem 2.5rem;
   border-radius: 0.5rem;
@@ -124,6 +125,29 @@
 
 .button-secondary:active {
   transform: scale(0.95);
+} 
+
+.trusted-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  color: #4B5563;
+  font-size: 0.875rem;
 }
+
+@media (max-width: 640px) {
+  .trusted-container {
+    font-size: 0.75rem;
+  }
+}
+
+.trusted-container img {
+  height: 3rem;
+  width:  3rem;
+  width: auto;
+}
+
 
 
