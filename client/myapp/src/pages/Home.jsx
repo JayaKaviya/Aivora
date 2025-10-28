@@ -13,6 +13,7 @@
 import React from 'react'
 import '../index.css'; 
 import Navbar  from '../components/Navbar';
+import Hero from '../components/Hero';
 
 function Home(userDetails) {
 
@@ -26,7 +27,8 @@ function Home(userDetails) {
 
   return (
     <div >
-      <Navbar />
+      <Navbar /> 
+      <Hero/>
     <div className="container">
 
          <h1 className="heading">HOME</h1>

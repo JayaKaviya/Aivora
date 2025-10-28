@@ -1,6 +1,6 @@
 import React from 'react'
 import assets from '../assets'
-import '../Navbar.css'
+import './Navbar.css'
 import {ArrowRight} from 'lucide-react'
 import { useNavigate } from "react-router-dom";
 

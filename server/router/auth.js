@@ -21,6 +21,6 @@ router.get('/login/failed', loginFailed);
 router.get('/logout', logout);
 
 // Email/Password signup
-router.post('/signup', signup);
+// router.post('/signup', signup);
 
 module.exports = router;
