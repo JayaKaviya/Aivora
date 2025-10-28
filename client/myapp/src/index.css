@@ -9,6 +9,22 @@
   --color-primary: #5044e5; 
 }
 
+@media (min-width: 640px) {
+  :root {
+    --font-size-heading: 3rem;
+    --padding-container: 2rem;
+    --form-width: 80vw;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --font-size-heading: 4rem;
+    --padding-container: 3rem;
+    --form-width: 70vw;
+  }
+}
+
 .hello-text {
   color: #043069; 
 }
@@ -46,6 +62,15 @@
     background-color: white;
     box-shadow: 3px 4px 36px -6px rgba(0,0,0,0.4);
     border-radius: 50px;
+}
+
+.heading {
+  font-size: var(--font-size-heading);
+}
+
+.form_container {
+  padding: var(--padding-container);
+  width: var(--form-width);
 }
 
 
