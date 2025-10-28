@@ -15,7 +15,11 @@ function Hero() {
                     <button className="button-secondary">
                         Watch demo
                     </button>
+            </div> 
+            <div className="trusted-container">
+                    <img src="/new.png" alt="User Group" />Trusted by 2k+ people
             </div>
+
         </div>
     </div>
   )
