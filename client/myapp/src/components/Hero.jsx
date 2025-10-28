@@ -4,9 +4,9 @@ function Hero() {
   return (
     <div className='my-div'>
       <div className='intro'>
-            <h1 className='my-heading'>Create amazing content with AI tools</h1>
-            <p>Transform your content creation with our suite of premium AI tools. Write articles, generate images, and enhance your workflow.</p> 
-       </div>
+            <h1 className='my-heading'>Create Smarter Content <br/> with <span className='ai'>AI tool</span></h1>
+            <p className='my-paragraph'>Boost your content creation using our advanced AI tools. Craft engaging articles, generate stunning visuals, and streamline your workflow.</p> 
+        </div>
     </div>
   )
 }
