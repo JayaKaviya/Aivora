@@ -1,0 +1,98 @@
+.section-container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
+
+@media (min-width: 640px) {
+  .section-container {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-container {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+}
+
+.section-intro {
+  text-align: center;
+}
+
+.section-heading {
+  color: #334155; 
+  font-size: 42px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.section-description {
+  color: #6B7280; 
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.tools-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.tool-card {
+  padding: 2rem;
+  margin: 1rem;
+  max-width: 20rem;
+  border-radius: 0.5rem;
+  background-color: #fdfdfe;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f3f4f6;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.tool-card:hover {
+  transform: translateY(-0.25rem);
+}
+
+.tool-icon {
+  width: 3rem;
+  height: 3rem;
+  padding: 0.75rem;
+  color: white;
+  border-radius: 0.75rem;
+  display: inline-block;
+}
+
+.tool-title {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.tool-description {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .tool-title {
+    font-size: 1rem;
+  }
+  .tool-description {
+    font-size: 0.75rem;
+  }
+}

@@ -14,6 +14,7 @@ import React from 'react'
 import '../index.css'; 
 import Navbar  from '../components/Navbar';
 import Hero from '../components/Hero';
+import AiTools from '../components/AiTools';
 
 function Home(userDetails) {
 
@@ -29,6 +30,8 @@ function Home(userDetails) {
     <div >
       <Navbar /> 
       <Hero/>
+      <AiTools user={user}/>
+
     <div className="container">
 
          <h1 className="heading">HOME</h1>
