@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <div className='navbar'>
         <img src={assets.aivora} alt="logo" className='navbar-logo' onClick={()=>navigate('/')}/>
-        <button className='getbtn'>Get Started<ArrowRight className='icon-small' /></button>
+        <button className='getbtn' onClick={()=>navigate('/profile')}>Profile<ArrowRight className='icon-small' /></button>
     </div>
   )
 }
