@@ -6,6 +6,7 @@ import './App.css'
 import Home from './pages/Home';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Profile from './pages/Profile';
 import Layout from './pages/Layout';
 import Dashboard from './pages/Dashboard'
 import BlogTitle from './pages/BlogTitle';
@@ -48,7 +49,7 @@ function App() {
                   <Route path='/' element={user ? <Home user={user} /> : <Navigate to="/login" />}/>
                   <Route path="/login" element={user ? <Navigate to="/" /> : <Login />}/>
                   <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />}  />
-               
+                  <Route path="/profile"  element={user ? <Profile user={user} /> : <Navigate to="/login"/>}  />
                   <Route path='/ai' element={<Layout/>}>
                         <Route index element={<Dashboard/>}/>
                         <Route path='blog-titles' element={<BlogTitle/>}/>

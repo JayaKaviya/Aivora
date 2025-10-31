@@ -1,6 +1,6 @@
 import React from 'react'
 import './AiTools.css'
-import { AiToolsData } from '../../public/assets'
+import { AiToolsData } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 
 function AiTools({user}) {
