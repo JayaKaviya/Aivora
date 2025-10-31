@@ -15,6 +15,7 @@ import '../index.css';
 import Navbar  from '../components/Navbar';
 import Hero from '../components/Hero';
 import AiTools from '../components/AiTools';
+import Testimonial from '../components/Testimonial';
 
 function Home(userDetails) {
 
@@ -26,6 +27,7 @@ function Home(userDetails) {
       <Navbar/> 
       <Hero/>
       <AiTools user={user}/>
+      <Testimonial />
     </div>
   )
 }
