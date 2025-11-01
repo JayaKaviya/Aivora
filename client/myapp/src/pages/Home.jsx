@@ -16,7 +16,8 @@ import Navbar  from '../components/Navbar';
 import Hero from '../components/Hero';
 import AiTools from '../components/AiTools';
 import Testimonial from '../components/Testimonial';
-
+import Plan from '../components/Plan';
+import Footer from '../components/Footer'
 function Home(userDetails) {
 
   const user=userDetails.user;
@@ -28,6 +29,8 @@ function Home(userDetails) {
       <Hero/>
       <AiTools user={user}/>
       <Testimonial />
+      <Plan />
+      <Footer />
     </div>
   )
 }
