@@ -1,0 +1,32 @@
+.pricing-section {
+  max-width: 42rem;
+  margin: 7.5rem auto;
+  position: relative;
+  z-index: 20;
+}
+
+.pricing-header {
+  text-align: center;
+  margin:2rem;
+}
+
+.pricing-title {
+  color: #334155;
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.pricing-subtitle {
+  color: #6b7280;
+  max-width: 32rem;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-size: 1rem;
+} 
+
+.pricing-card{
+  display: flex;
+  justify-content: center;
+
+}
