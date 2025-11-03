@@ -17,7 +17,6 @@
 
 
 @media (min-width: 640px) {
-  /* sm:px-20 => padding-left/right: 80px */
   .navbar {
     padding-left: 80px;
     padding-right: 80px;
@@ -25,7 +24,6 @@
 }
 
 @media (min-width: 1280px) {
-  /* xl:px-32 => padding-left/right: 128px */
   .navbar {
     padding-left: 128px;
     padding-right: 128px;
@@ -33,19 +31,18 @@
 } 
 
 .navbar-logo {
-  width: 80px; /* w-32 = 8rem = 128px */
+  width: 80px; 
    height : 80px;
 }
 
 @media (min-width: 640px) {
   .navbar-logo {
-    width: 90px; /* sm:w-44 = 11rem = 176px */
+    width: 90px; 
     height : 90px;
   }
 } 
 
 
-/* From Uiverse.io by adamgiebl */ 
 .getbtn { 
 
   background: #473168;
