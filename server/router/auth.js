@@ -13,11 +13,11 @@ const {
 router.get('/google', googleAuth);
 router.get('/google/callback', googleCallback);
 
-// Login success/failure
+
 router.get('/login/success', loginSuccess);
 router.get('/login/failed', loginFailed);
 
-// Logout
+
 router.get('/logout', logout);
 
 // Email/Password signup
