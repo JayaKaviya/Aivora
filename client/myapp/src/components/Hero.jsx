@@ -17,7 +17,7 @@ function Hero() {
                     </button>
             </div> 
             <div className="trusted-container">
-                    <img src="/new.png" alt="User Group" />Trusted by 2k+ people
+                    <img src="/community.png" alt="User Group" />Trusted by 2k+ people
             </div>
 
         </div>
