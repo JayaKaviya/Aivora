@@ -1,10 +1,23 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
+import {X,Menu} from 'lucide-react'
+import './Layout.css'
 
-function Layout() {
+const Layout= ()=>{
+  const navigate=useNavigate();
+  const [sidebar,setSidebar]=useState(false)
+
   return (
-    <div>
-      <p>Layout</p>
+    <div className="page-container">
+      
+      <nav className="navbar">
+        <img src="/aivora.png" alt="Logo" onClick={()=>navigate('/')} className="nav-logo"/>
+        {
+           sidebar ? <X className='nav-icon sm:hidden'/>
+           : <Menu className='nav-icon sm:hidden'/>
+        }
+      </nav>
+
       <Outlet/>
     </div>
   )

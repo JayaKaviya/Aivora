@@ -8,7 +8,9 @@ function Footer() {
         <div className="footer-logo">
          <img src='./aivora.png' alt='Aivora' className='logo'/>
           <p className="footer-logo-text">
-            Aivora is a cutting-edge platform that helps creators generate, enhance, and optimize content effortlessly. Trusted by thousands of users worldwide.
+            Experience the power of AI in Aivora.<br></br>
+            It is a cutting-edge platform that helps creators generate, enhance, and optimize content effortlessly.<br></br>
+            Trusted by thousands of users worldwide.
           </p>
         </div>
 
