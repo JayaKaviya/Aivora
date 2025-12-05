@@ -38,21 +38,22 @@ function Testimonial() {
 
             <div className="testimonials-container">
                 {dummyTestimonialData.map((testimonial, index) => (
-                <div key={index} className="testimonial-card">
-                    <div className="stars">                   
-                        {Array(5).fill(0).map((_, index) => 
-                        (<img key={index} src={index < testimonial.rating ? assets.star_icon : assets.star_dull_icon}  alt="star"/>))}
-                    </div>
-                    <p className="testimonial-content">"{testimonial.content}"</p>
-                    <hr className="testimonial-divider" />
-                    <div className="testimonial-author">
-                        <img src={testimonial.image} className="author-image" alt={testimonial.name}/>
-                        <div className="author-info">
-                            <h3 className="author-name">{testimonial.name}</h3>
-                            <p className="author-title">{testimonial.title}</p>
+                    <div key={index} className="testimonial-card">
+                        <div className="stars">                   
+                            {Array(5).fill(0).map((_, index) => 
+                              (<img key={index} src={index < testimonial.rating ? assets.star_icon : assets.star_dull_icon}  alt="star"/>))
+                            }
+                        </div>
+                        <p className="testimonial-content">"{testimonial.content}"</p>
+                        <hr className="testimonial-divider" />
+                        <div className="testimonial-author">
+                            <img src={testimonial.image} className="author-image" alt={testimonial.name}/>
+                            <div className="author-info">
+                                <h3 className="author-name">{testimonial.name}</h3>
+                                <p className="author-title">{testimonial.title}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
                 ))}
             </div>
     </div>
