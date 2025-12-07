@@ -10,7 +10,7 @@ const Layout= ()=>{
   return (
     <div className="page-container">
       
-      <nav className="navbar">
+      <nav className="navbarai">
         <img src="/aivora.png" alt="Logo" onClick={()=>navigate('/')} className="nav-logo"/>
         {
            sidebar ? <X className='nav-icon sm:hidden'/>
