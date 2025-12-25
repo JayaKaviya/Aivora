@@ -1,24 +1,38 @@
 import React, { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import {X,Menu} from 'lucide-react'
+import Sidebar from '../components/Sidebar'
 import './Layout.css'
+import Login from "./Login";
 
-const Layout= ()=>{
+const Layout= ({user})=>{
   const navigate=useNavigate();
   const [sidebar,setSidebar]=useState(false)
 
-  return (
+  return user ? (
     <div className="page-container">
       
       <nav className="navbarai">
         <img src="/aivora.png" alt="Logo" onClick={()=>navigate('/')} className="nav-logo"/>
         {
-           sidebar ? <X className='nav-icon sm:hidden'/>
-           : <Menu className='nav-icon sm:hidden'/>
+           sidebar 
+           ? <X onClick={()=>setSidebar(false)} className='nav-icon sm:hidden'/>
+           : <Menu onClick={()=>setSidebar(true)} className='nav-icon sm:hidden'/>
         }
       </nav>
 
-      <Outlet/>
+      <div className='main-container'>
+         <Sidebar user={user} sidebar={sidebar} setSidebar={setSidebar}/>
+         <div className='outlet'>
+             <Outlet/>
+         </div>
+      </div>
+
+   
+    </div>
+  ) :(
+    <div className='centered-container'>
+      <Login />
     </div>
   )
 }
