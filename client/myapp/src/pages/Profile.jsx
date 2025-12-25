@@ -7,6 +7,7 @@ function Profile({user}) {
       '_self'
     );
   }
+    // console.log("User details:", user);
   return (
     <div>
       <div className="container">
@@ -18,9 +19,10 @@ function Profile({user}) {
               </div>
               <div className="right">
                     <h2 className="form_heading">Profile</h2> 
+
                     <img
                         className="profile_img"
-                        src={user?.picture || "./aivora.png"}
+                        src={user?.picture ? user.picture : "./aivora.png"}
                         alt="profile"
                         />
                     <input type="text" defaultValue={user.name} className="input" placeholder="Username"/>

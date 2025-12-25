@@ -50,7 +50,7 @@ function App() {
                   <Route path="/login" element={user ? <Navigate to="/" /> : <Login />}/>
                   <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />}  />
                   <Route path="/profile"  element={user ? <Profile user={user} /> : <Navigate to="/login"/>}  />
-                  <Route path='/ai' element={<Layout/>}>
+                  <Route path='/ai' element={ user ? <Layout user={user}/> : <Navigate to="/login"/>}>
                         <Route index element={<Dashboard/>}/>
                         <Route path='blog-titles' element={<BlogTitle/>}/>
                         <Route path='community' element={<Community/>}/>
