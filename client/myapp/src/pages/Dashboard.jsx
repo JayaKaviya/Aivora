@@ -36,7 +36,7 @@ const Dashboard = () => {
             {/* Active Plan Card */}
             <div className="card">
                 <div className="card-text">
-                    <p className="card-label">Total Creations</p>
+                    <p className="card-label">Active Plan</p>
                     <h2 className="card-number">{creations.length}</h2>              
                 </div>
                 <div className="card-icon">
