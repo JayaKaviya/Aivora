@@ -37,7 +37,11 @@ const Dashboard = () => {
             <div className="card">
                 <div className="card-text">
                     <p className="card-label">Active Plan</p>
-                    <h2 className="card-number">{creations.length}</h2>              
+                    <h2 className="card-number">
+                        <Protect plan="premium" fallback="Free">
+                          Premium
+                        </Protect>
+                    </h2>              
                 </div>
                 <div className="card-icon">
                     <Sparkles className="sparkles-icon" />
