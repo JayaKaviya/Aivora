@@ -50,3 +50,14 @@
   height: auto;
   color: #ffffff;
 }
+
+.recent-creations {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.recent-title {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
