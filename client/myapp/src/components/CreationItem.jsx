@@ -1,6 +1,8 @@
 import React from 'react'
 import './CreationItem.css'
 import { useState } from 'react'
+import Markdown from 'react-markdown'
+
 function CreationItem({item}) {
 
     const [expanded,setExpanded]=useState(false)
@@ -26,8 +28,10 @@ function CreationItem({item}) {
                     ) : 
                     (
                         <div className='content-box'>
-                            <div>
-                                {item.content}                         
+                            <div className="reset-tw">
+                                <Markdown>
+                                    {typeof item.content === "string" ? item.content : String(item.content)}
+                                </Markdown>                        
                             </div>
                         </div>
                     )

@@ -49,4 +49,10 @@
     background-color: #f9fafb;
 }
 
+.reset-tw {
+    all: unset;           
+    display: block;      
+    box-sizing: border-box; 
+}
+
 
