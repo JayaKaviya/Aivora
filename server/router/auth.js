@@ -1,26 +1,26 @@
-const router = require('express').Router();
-const {
+import { Router } from "express";
+import {
   googleAuth,
   googleCallback,
   loginSuccess,
   loginFailed,
   logout,
-  signup,
-} = require('../controllers/authController');
+  // signup,
+} from "../controllers/authController.js";
+
+const router = Router();
 
 
 // Google OAuth
-router.get('/google', googleAuth);
-router.get('/google/callback', googleCallback);
+router.get("/google", googleAuth);
+router.get("/google/callback", googleCallback);
 
+router.get("/login/success", loginSuccess);
+router.get("/login/failed", loginFailed);
 
-router.get('/login/success', loginSuccess);
-router.get('/login/failed', loginFailed);
-
-
-router.get('/logout', logout);
+router.get("/logout", logout);
 
 // Email/Password signup
-// router.post('/signup', signup);
+// router.post("/signup", signup);
 
-module.exports = router;
+export default router;
