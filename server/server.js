@@ -1,16 +1,21 @@
 // Environment variables
-require('dotenv').config() 
+import 'dotenv/config';
 
 // Core server setup
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import router from './router/index.js';
+
+
 // Authentication
-const passport = require('passport');
-const passportSetup=require('./passport')
-const authRoute=require('./router/auth')
+import passport from "passport";
+import "./passport.js";
+import authRoute from "./router/auth.js";
+
 // Session management
-const cookieSession = require('cookie-session'); 
-const session = require('express-session');
+import cookieSession from "cookie-session";
+import session from "express-session";
+
 const app=express(); 
 // app.use(
 //     cookieSession(
@@ -44,9 +49,14 @@ app.use( cors({
     credentials : true
 })) 
 
+// app.use(cors())
+app.use(express.json())
+
 app.use("/auth", authRoute);
+app.use("/", router);
 
 const port=process.env.PORT || 8000; 
+
 app.listen(port,()=>{
   console.log(`Server is listening ${port}`)
 })
