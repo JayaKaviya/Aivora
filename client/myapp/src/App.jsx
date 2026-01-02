@@ -24,8 +24,10 @@ function App() {
 		try {
         const url =`${import.meta.env.VITE_API_URL}/auth/login/success`;
         const { data } = await axios.get(url, { withCredentials: true });
+     
         if (data.user && data.user._json) {
               setUser(data.user._json); 
+              console.log("Logged in token", data.token);
         }
 		} catch (err) {
         if (err.response && err.response.status === 403) {
