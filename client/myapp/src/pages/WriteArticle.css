@@ -51,6 +51,12 @@
     color: #FF4938;
 }
 
+.object-icon{
+  width: 1.5rem;
+    height: 1.5rem;
+    color: #4A7AFF;
+}
+
 
 .card-title {
   font-size: 1.25rem;
@@ -195,6 +201,26 @@
   border: none; 
 }
 
+.generate-button-object{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  background: linear-gradient(to right, #417DF6, #8E37EB);
+  color: #ffffff;
+
+  padding: 0.5rem 1rem;
+  margin-top: 1.5rem;
+
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+
+  cursor: pointer;
+  border: none;
+}
+
 .generate-button:hover {
   opacity: 0.95;
 }
@@ -268,6 +294,11 @@
   color: #FF4938;
 }
 
+.header-icon-object{
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #4A7AFF;
+}
 
 .generated-title {
   font-size: 1.25rem;
