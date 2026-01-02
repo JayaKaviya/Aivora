@@ -1,20 +1,24 @@
-// Environment variables
-import 'dotenv/config';
+import {clerkMiddleware,requireAuth} from '@clerk/express'
 
 // Core server setup
 import express from 'express';
 import cors from 'cors';
-import router from './router/index.js';
 
+// Environment variables
+import 'dotenv/config';
 
 // Authentication
 import passport from "passport";
 import "./passport.js";
-import authRoute from "./router/auth.js";
+import authRoute from "./routes/auth.js";
 
 // Session management
 import cookieSession from "cookie-session";
 import session from "express-session";
+
+// import router from './routes/index.js';
+import aiRouter from './routes/aiRoutes.js';
+
 
 const app=express(); 
 // app.use(
@@ -52,11 +56,19 @@ app.use( cors({
 // app.use(cors())
 app.use(express.json())
 
+//Clerk
+app.use(clerkMiddleware())
+app.use(requireAuth())
+
+//Routes
 app.use("/auth", authRoute);
-app.use("/", router);
+// app.use("/", router);
+app.use('/api/ai',aiRouter);
+
+
+
 
 const port=process.env.PORT || 8000; 
-
 app.listen(port,()=>{
   console.log(`Server is listening ${port}`)
 })

@@ -13,20 +13,42 @@ export const googleCallback = passport.authenticate("google", {
 });
 
 // Login success
+// export const loginSuccess = (req, res) => {
+//   if (req.user) {
+//     res.status(200).json({
+//       error: false,
+//       message: "Successfully Logged In",
+//       user: req.user,
+//     });
+//   } else {
+//     res.status(403).json({
+//       error: true,
+//       message: "Not Authorized",
+//     });
+//   }
+// };
+
+import jwt from "jsonwebtoken";
+
 export const loginSuccess = (req, res) => {
   if (req.user) {
+    const token = jwt.sign(
+      { id: req.user.id, email: req.user.emails[0].value },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
     res.status(200).json({
       error: false,
       message: "Successfully Logged In",
       user: req.user,
+      token, // <-- this is your JWT
     });
   } else {
-    res.status(403).json({
-      error: true,
-      message: "Not Authorized",
-    });
+    res.status(403).json({ error: true, message: "Not Authorized" });
   }
 };
+
 
 // Login failed
 export const loginFailed = (req, res) => {
