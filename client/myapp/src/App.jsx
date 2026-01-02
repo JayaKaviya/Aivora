@@ -53,7 +53,7 @@ function App() {
                   <Route path='/ai' element={ user ? <Layout user={user}/> : <Navigate to="/login"/>}>
                         <Route index element={<Dashboard/>}/>
                         <Route path='blog-titles' element={<BlogTitle/>}/>
-                        <Route path='community' element={<Community/>}/>
+                        <Route path='community' element={ user ? <Community user={user}/> : <Navigate to="/login"/>}/>
                         <Route path='generate-images' element={<GenerateImages/>}/>
                         <Route path='remove-background' element={<RemoveBackground/>}/>
                         <Route path='remove-object' element={<RemoveObject/>}/>

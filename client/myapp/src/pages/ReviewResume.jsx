@@ -32,7 +32,7 @@ function ReviewResume()  {
                 </button>
 
           </form>
-          <div className="right-column-blob">
+          <div className="right-column-resume">
               <div className="generated-header">
                 <FileText className="header-icon-resume" />
                 <h1 className="generated-title">Analysis Results</h1>
