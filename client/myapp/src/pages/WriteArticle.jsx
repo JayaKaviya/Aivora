@@ -12,9 +12,7 @@ function WriteArticle() {
     {length:800,text:'Short (500-800 words)'},
     {length:1200,text:'Medium (800-1200 words)'},
     {length:1600,text: 'Long (1200+ words)'}
-
-  ] 
-
+  ]
   const [selectedLength,setSelectedLength]= useState(articleLength[0]);
   const [input,setInput]= useState('');
   const [loading,setLoading]=useState(false)
@@ -26,21 +24,36 @@ function WriteArticle() {
         e.preventDefault(); 
 
         try{
-            setLoading(true)
-            const prompt=`Write an article about ${input} in ${selectedLength.text}`
+              setLoading(true)
 
-            const {data}=await axios.post('/api/ai/generate-article',
-              {prompt,length:selectedLength.length},
-              {headers: {}}
-            )
+              const token = localStorage.getItem("token");
+              if (!token) {
+                throw new Error("User not authenticated");
+              }
+              const prompt=`Write an article about ${input} in ${selectedLength.text}`
 
+              const {data}=await axios.post('/api/ai/generate-article',
+                            {prompt, length:selectedLength.length},
+                            {
+                              headers: {
+                                Authorization: `Bearer ${token}`,
+                              }
+                            }
+                          ) 
 
+              if(data.success)
+              {
+                setContent(data.content)
+              } else{
+                toast.error(data.message)
+              }
 
-        } catch(error){
+            } catch(error){
+                  toast.error(error.message)        
+            }
 
-
-        }
-  }
+           setLoading(false)
+    }
 
       // const onSubmitHandler = async (e) => {
       //   e.preventDefault();
@@ -88,8 +101,11 @@ function WriteArticle() {
                   }
                 </div>
                 <br />
-               <button className="generate-button">
-                  <Edit className="generate-icon" />
+               <button disabled={loading} className="generate-button">
+                 {
+                  loading ?  <span className="spinner"></span>
+                    : <Edit className="generate-icon" />
+                 }  
                   Generate article
                 </button>
 
@@ -97,15 +113,25 @@ function WriteArticle() {
           <div className="right-column">
               <div className="generated-header">
                 <Edit className="header-icon" />
-                <h1 className="generated-title">Generated Article</h1>
-              </div>
+                <h1 className="generated-title">Generate Article</h1>
+              </div> 
 
-              <div className="generated-body">
-                <div className="generated-empty">
-                  <Edit className="empty-icon" />
-                  <p>Enter a topic and click "Generate article" to get started</p>
-                </div>
-              </div>
+               {!content ? (
+                  <div className="generated-body">
+                    <div className="generated-empty">
+                      <Edit className="empty-icon" />
+                      <p>Enter a topic and click "Generate article" to get started</p>
+                    </div>
+                  </div>    
+               ) : (
+                 <div classname='custom-class'>
+                      <div>
+                        {content}
+                      </div>
+                  </div>
+
+               )}
+             
           </div>
 
     </div>
