@@ -2,6 +2,8 @@ import React from 'react'
 import './WriteArticle.css'
 import { Sparkles,Edit } from 'lucide-react';
 import { useState } from 'react';
+import axios from "axios";
+
 function WriteArticle() {
   
   const articleLength=[
@@ -13,9 +15,35 @@ function WriteArticle() {
 
   const [selectedLength,setSelectedLength]= useState(articleLength[0]);
   const [input,setInput]= useState('');
-  const onSubmitHandler=async()=>{
+  // const onSubmitHandler=async()=>{
+  //       e.preventDefault();
+  // }
+
+      const onSubmitHandler = async (e) => {
         e.preventDefault();
-  }
+
+        if (!input.trim()) return;
+
+        try {
+              const res = await axios.post(
+                "http://localhost:8000/api/ai/generate-article",
+                {
+                  prompt: input,
+                  length: selectedLength.length,
+                },
+                {
+                  withCredentials: true, // IMPORTANT if using cookies/session
+                }
+              );
+
+            console.log(res.data);
+        } catch (error) {
+          console.error(
+            error.response?.data?.message || error.message
+          );
+        }
+      };
+
 
   return (
     <div className="article-container">
@@ -25,7 +53,8 @@ function WriteArticle() {
                   <h1 className="card-title">Article Configuration</h1>
                 </div>
                 <p className="form-label">Article Topic</p>
-                <input type="text" className="form-input" onChange={(e)=>setInput(e.target.value)} value={input} placeholder="The future of artificial intelligence is..." required />        
+                <input type="text" className="form-input" onChange={(e)=>setInput(e.target.value)}
+                 value={input} placeholder="The future of artificial intelligence is..." required />        
                 <p className="form-label label-spacing">Article Length</p>
                 <div className='length-container'>
                   {
