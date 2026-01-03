@@ -2,6 +2,7 @@ import React from 'react'
 import './WriteArticle.css'
 import { Sparkles, Image } from 'lucide-react';
 import { useState } from 'react';
+import axios from "axios";
 
 function GenerateImages() {
 
@@ -13,9 +14,40 @@ function GenerateImages() {
   const [input,setInput]= useState('');
   const [publish,setPublish]= useState(false);
 
-  const onSubmitHandler=async(e)=>{
-          e.preventDefault();
-    }
+  // const onSubmitHandler=async(e)=>{
+  //         e.preventDefault();
+  //   }
+
+
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    if (!input.trim()) return;
+
+    try {
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/ai/generate-image`,
+        {
+          prompt: `${input}, ${selectedStyle}`,
+          publish: true, 
+        },
+        {
+          withCredentials: true, // important for auth/session
+        }
+      );
+
+      if (response.data.success) {
+        // setResult(response.data.image); // or secure_url
+        console.log("Generated image URL:", response.data.content);
+      }
+
+    } catch (error) {
+      console.error("Image generation failed:", error.response?.data || error.message);
+    } 
+  };
+
 
   return (
     <div className="article-container">
