@@ -16,6 +16,9 @@ import authRoute from "./routes/auth.js";
 import cookieSession from "cookie-session";
 import session from "express-session";
 
+// Cloudinary configuration
+import connectCloudinary from './configs/cloudinary.js';
+
 // import router from './routes/index.js';
 import aiRouter from './routes/aiRoutes.js';
 
@@ -30,6 +33,8 @@ const app=express();
 //         }
 //     )
 // ) 
+
+await connectCloudinary();
 
 app.use(
     session({

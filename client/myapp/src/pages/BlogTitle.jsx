@@ -2,6 +2,7 @@ import React from 'react'
 import './WriteArticle.css'
 import { Sparkles,Edit, Hash } from 'lucide-react';
 import { useState } from 'react';
+import axios from "axios";
 function BlogTitle() {
 
    const blobCategories=[
@@ -11,9 +12,36 @@ function BlogTitle() {
   const [selectedCategory,setSelectedCategory]= useState('General');
   const [input,setInput]= useState('');
 
-  const onSubmitHandler=async(e)=>{
-          e.preventDefault();
+  // const onSubmitHandler=async(e)=>{
+  //         e.preventDefault();
+  //   }
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    if (!input.trim()) return;
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/ai/generate-blog-title`,
+        {
+          prompt: input,
+          category: selectedCategory,
+        },
+        {
+          withCredentials: true, // important if auth/session is used
+        }
+      );
+
+      console.log("Generated Titles Response:", response.data);
+
+    } catch (error) {
+      console.error(
+        "Title generation failed:",
+        error.response?.data || error.message
+      );
     }
+  };
 
   return (
     <div className="article-container">
