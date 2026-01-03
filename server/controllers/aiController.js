@@ -10,7 +10,8 @@ const AI = new OpenAI({
 
 export const generateArticle=async(req,res)=>{
 
-    try{
+    try{  
+        //clerk userId
           const {userId}=req.auth(); 
           const {prompt,length}=req.body;
           const plan=req.plan;
@@ -21,6 +22,7 @@ export const generateArticle=async(req,res)=>{
             return res.json({success:false, message:"Limit reached.Upgrade to continue."})
           }
 
+          console.log("Generating article for user:", userId, "with plan:", plan, "and free usage:", free_usage,"prompt:",prompt,"length:",length);
            const response = await AI.chat.completions.create({
                 model: "gemini-2.5-flash",
                 messages: [
@@ -36,9 +38,14 @@ export const generateArticle=async(req,res)=>{
 
             const content=response.choices[0].message.content;
 
-            await db`INSERT INTO creations(user_id,prompt,content, type) 
-            VALUES(${userId}, ${prompt}, ${content},'article')`;
+            // await db`INSERT INTO creations(user_id,prompt,content, type) 
+            // VALUES(${userId}, ${prompt}, ${content},'article')`;
 
+            await db.execute(
+            `INSERT INTO creations (user_id, prompt, content, type)
+            VALUES (?, ?, ?, ?)`,
+            [userId, prompt, content, "article"]
+            );
             
             if(plan !== 'premium'){
                 await clerkClient.users.updateUserMetadata(userId,{
