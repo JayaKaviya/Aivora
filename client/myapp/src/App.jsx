@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate  } from "react-router-dom";
 import axios from "axios";
+import {Toaster} from 'react-hot-toast'
 import './App.css'
 
 import Home from './pages/Home';
@@ -27,7 +28,7 @@ function App() {
      
         if (data.user && data.user._json) {
               setUser(data.user._json); 
-              console.log("Logged in token", data.token);
+              // console.log("Logged in token", data.token);
         }
 		} catch (err) {
         if (err.response && err.response.status === 403) {
@@ -46,6 +47,7 @@ function App() {
   return (
     <div className="container">
           {/* <div className="hello-text">hello</div>  */}
+          <Toaster />
           <BrowserRouter>
               <Routes>
                   <Route path='/' element={user ? <Home user={user} /> : <Navigate to="/login" />}/>

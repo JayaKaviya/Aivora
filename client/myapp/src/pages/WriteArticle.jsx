@@ -4,6 +4,8 @@ import { Sparkles,Edit } from 'lucide-react';
 import { useState } from 'react';
 import axios from "axios";
 
+axios.defaults.baseURL=import.meta.env.VITE_BASE_URL;
+
 function WriteArticle() {
   
   const articleLength=[
@@ -15,34 +17,55 @@ function WriteArticle() {
 
   const [selectedLength,setSelectedLength]= useState(articleLength[0]);
   const [input,setInput]= useState('');
-  // const onSubmitHandler=async()=>{
-  //       e.preventDefault();
-  // }
+  const [loading,setLoading]=useState(false)
+  const [content,setContent]=useState('')
+  
+  // const {getToken}= useAuth()
 
-      const onSubmitHandler = async (e) => {
-        e.preventDefault();
+  const onSubmitHandler=async()=>{
+        e.preventDefault(); 
 
-        if (!input.trim()) return;
+        try{
+            setLoading(true)
+            const prompt=`Write an article about ${input} in ${selectedLength.text}`
 
-        try {
-              const res = await axios.post(
-                "http://localhost:8000/api/ai/generate-article",
-                {
-                  prompt: input,
-                  length: selectedLength.length,
-                },
-                {
-                  withCredentials: true, // IMPORTANT if using cookies/session
-                }
-              );
+            const {data}=await axios.post('/api/ai/generate-article',
+              {prompt,length:selectedLength.length},
+              {headers: {}}
+            )
 
-            console.log(res.data);
-        } catch (error) {
-          console.error(
-            error.response?.data?.message || error.message
-          );
+
+
+        } catch(error){
+
+
         }
-      };
+  }
+
+      // const onSubmitHandler = async (e) => {
+      //   e.preventDefault();
+
+      //   if (!input.trim()) return;
+
+      //   try {
+      //         const res = await axios.post(
+      //           "http://localhost:8000/api/ai/generate-article",
+      //           {
+      //             prompt: input,
+      //             length: selectedLength.length,
+      //           },
+      //           {
+      //             withCredentials: true, // IMPORTANT if using cookies/session
+      //           }
+      //         );
+
+      //       console.log(res.data);
+      //   } catch (error) {
+      //     console.error(
+      //       error.response?.data?.message || error.message
+      //     );
+      //   }
+      // };
 
 
   return (
