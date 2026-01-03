@@ -23,13 +23,14 @@ function App() {
 
 	const getUser = async () => {
 		try {
-        const url =`${import.meta.env.VITE_API_URL}/auth/login/success`;
+        const url =`${import.meta.env.VITE_BASE_URL}/auth/login/success`;
         const { data } = await axios.get(url, { withCredentials: true });
      
         if (data.user && data.user._json) {
-              setUser(data.user._json); 
-              // console.log("Logged in token", data.token);
+          setUser(data.user._json);
+          localStorage.setItem("token", data.token);
         }
+
 		} catch (err) {
         if (err.response && err.response.status === 403) {
           // ✅ 403 just means "not logged in" — ignore it silently
