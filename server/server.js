@@ -21,6 +21,7 @@ import connectCloudinary from './configs/cloudinary.js';
 
 // import router from './routes/index.js';
 import aiRouter from './routes/aiRoutes.js';
+import userRouter from './routes/userRoutes.js';
 
 
 const app=express(); 
@@ -69,7 +70,7 @@ app.use(requireAuth())
 app.use("/auth", authRoute);
 // app.use("/", router);
 app.use('/api/ai',aiRouter);
-
+app.use('/api/user',userRouter);
 
 
 
