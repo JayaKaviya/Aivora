@@ -27,11 +27,13 @@ export const auth = async (req, res, next) => {
 
             req.plan = hasPremiumPlan ? 'premium' : 'free';
 
-            // console.log("Clerk auth details : ", userId,req.plan,req.free_usage)
+            //  console.log("Clerk auth details : ", userId,req.plan,req.free_usage)
           next();
     } 
     catch (error) 
-    {   
+    {    
+      // console.log("Clerk auth error", error.message)
+
       return res.status(401).json({
         success: false,
         message: "Choose your plan (Free or Premium) to use the features of Aivora."

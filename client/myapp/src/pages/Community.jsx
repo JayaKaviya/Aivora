@@ -3,16 +3,68 @@ import { dummyPublishedCreationData } from '../assets/assets';
 import './Community.css'
 import { useState,useEffect } from 'react';
 import { Heart } from 'lucide-react';
-
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function Community({user}) {
 
   const [creations,setCreations]=useState([]);
-  const fetchCreations=async()=>{
-    setCreations(dummyPublishedCreationData)
-  }
-  
+  const [loading,setLoading]=useState(true)
 
+
+  const fetchCreations=async()=>{
+
+    try{
+
+      const {data}=await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/get-published-creations`,
+        {
+          withCredentials: true, 
+        }
+      )  
+      if(data.success)
+      {
+        setCreations(data.creations)
+      } else{
+        toast.error(data.message)
+      }
+
+    }catch(error){
+           toast.error(error.message)
+    } 
+    setLoading(false)
+    // setCreations(dummyPublishedCreationData)
+  } 
+
+   const imageLikeToggle=async (id)=>{
+    try{
+       const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/user/toggle-like-creation`,
+        {id},
+        {
+          withCredentials: true, 
+        }
+      )  
+
+       if(data.success && data.message === 'Creation Liked')
+      {
+        toast.success(data.message)
+        await fetchCreations()
+      }
+       else if(data.success && data.message === 'Creation Unliked')
+      {
+        toast.error(data.message)
+        await fetchCreations()
+      }
+       else{
+        toast.error(data.message)
+      }
+
+    }catch(error)
+    {
+       toast.error(error.message)
+    }
+   }
+
+  
   useEffect(()=>{
     if(user)
       {
@@ -20,7 +72,7 @@ function Community({user}) {
       }
   },[user])
 
-  return (
+  return !loading ? (
       <div className="creations">
             <h2 className="creations_title">Creations</h2>
 
@@ -35,13 +87,14 @@ function Community({user}) {
                               <div className="creation-likes">
                                 <p>{creation.likes.length}</p>
 
-                                <Heart
-                                  className={`heart-icon ${
-                                    creation.likes.includes(user.id)
-                                      ? "heart-liked"
-                                      : "heart-unliked"
-                                  }`}
-                                />
+                              <Heart
+                              onClick={() => imageLikeToggle(creation.id)}
+                              className="heart-icon"
+                              fill={creation.likes.includes(user.id) ? "#ef4444" : "none"}
+                              stroke={creation.likes.includes(user.id) ? "#ef4444" : "#ffffff"}
+                            />
+
+
                               </div>
                         </div>
                     </div>
@@ -49,6 +102,11 @@ function Community({user}) {
 
             </div>
       </div>
+
+  ) : (
+   <div className="loader-container">
+  <span className="spinner"></span>
+</div>
 
   )
 }

@@ -15,8 +15,8 @@ function BlogTitle() {
 
   const [selectedCategory,setSelectedCategory]= useState('General');
   const [input,setInput]= useState('');
-    const [loading,setLoading]=useState(false)
-    const [content,setContent]=useState('')
+  const [loading,setLoading]=useState(false)
+  const [content,setContent]=useState('')
 
   // const onSubmitHandler=async(e)=>{
   //         e.preventDefault();
@@ -40,7 +40,7 @@ function BlogTitle() {
                                 }
                             
                           ) 
-              console.log(data)
+              // console.log(data)
               if(data.success)
               {
                 setContent(data.content)

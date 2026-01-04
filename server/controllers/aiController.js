@@ -3,8 +3,11 @@ import db from '../configs/db.js'
 import { clerkClient } from "@clerk/express";
 import {v2 as cloudinary} from 'cloudinary';
 import axios from "axios";
-import fs from 'fs'
-import * as pdf from "pdf-parse";
+
+import fs from "fs";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const pdf = require("pdf-parse");
 
 // import pdf from 'pdf-parse/lib/pdf-parse.js'
 
@@ -29,7 +32,7 @@ export const generateArticle=async(req,res)=>{
           const {prompt,length}=req.body;
           const plan=req.plan;
           const free_usage=req.free_usage;
-          console.log("Prompt:", prompt, "Length:", length);
+        //   console.log("Prompt:", prompt, "Length:", length);
           if(plan !== 'premium' && free_usage>=50)
           {
             return res.json({success:false, message:"Limit reached.Upgrade to continue."})
@@ -91,7 +94,7 @@ export const generateBlogTitle=async(req,res)=>{
             return res.json({success:false, message:"Limit reached.Upgrade to continue."})
           }
 
-          console.log("Generating Blob title for user:", userId, "with plan:", plan, "and free usage:", free_usage,"prompt:",prompt);
+        //   console.log("Generating Blob title for user:", userId, "with plan:", plan, "and free usage:", free_usage,"prompt:",prompt);
            const response = await AI.chat.completions.create({
                 model: "gemini-2.5-flash",
                 messages: [{role: "user",
@@ -120,7 +123,7 @@ export const generateBlogTitle=async(req,res)=>{
             res.json({success:true, content})
     }
     catch(error){
-        console.log(error.message)
+        // console.log(error.message)
         res.json({success:false, message:error.message})
     }
 
@@ -135,12 +138,12 @@ export const generateImage=async(req,res)=>{
           const {prompt,publish}=req.body;
           const plan=req.plan;
 
-        //   if(plan !== 'premium')
-        //   {
-        //     return res.json({success:false, message:"Limit reached.Upgrade to continue."})
-        //   }
+          if(plan !== 'premium')
+          {
+            return res.json({success:false, message:"This feature is only available for premium subscriptions."})
+          }
 
-           console.log("Generating Image for user:", userId, "with plan:", plan,"prompt:",prompt,"publish:",publish);
+        //    console.log("Generating Image for user:", userId, "with plan:", plan,"prompt:",prompt,"publish:",publish);
              
             //Clip drop API
             const formData = new FormData()
@@ -166,7 +169,7 @@ export const generateImage=async(req,res)=>{
             res.json({success:true, content:secure_url})
     }
     catch(error){
-        console.log(error.message)
+        // console.log(error.message)
         res.json({success:false, message:error.message})
     }
 
@@ -179,14 +182,14 @@ export const removeImageBackground=async(req,res)=>{
     try{  
         //clerk userId
           const {userId}=req.auth(); 
-          const {image}=req.file;
+          const image=req.file;
           const plan=req.plan;
 
         //   if(plan !== 'premium')
         //   {
         //     return res.json({success:false, message:"This feature is only available for premium subscriptions."})
         //   }        
-    
+        
             //cloudinary
             const {secure_url}=await cloudinary.uploader.upload(image.path, {
                 transformation: [
@@ -203,10 +206,12 @@ export const removeImageBackground=async(req,res)=>{
             [userId, 'Remove background from image', secure_url, "image"]
             );
                    
+            // console.log(secure_url)
             res.json({success:true, content:secure_url})
+
     }
     catch(error){
-        console.log(error.message)
+        // console.log(error.message)
         res.json({success:false, message:error.message})
     }
 
@@ -219,13 +224,13 @@ export const removeImageObject=async(req,res)=>{
         //clerk userId
           const {userId}=req.auth(); 
           const {object} =req.body;
-          const {image}=req.file;
+          const image=req.file;
           const plan=req.plan;
 
-        //   if(plan !== 'premium')
-        //   {
-        //     return res.json({success:false, message:"This feature is only available for premium subscriptions."})
-        //   }        
+          if(plan !== 'premium')
+          {
+            return res.json({success:false, message:"This feature is only available for premium subscriptions."})
+          }        
     
             //cloudinary
             const {public_id}=await cloudinary.uploader.upload(image.path);
@@ -244,7 +249,7 @@ export const removeImageObject=async(req,res)=>{
             res.json({success:true, content:imageUrl})
     }
     catch(error){
-        console.log(error.message)
+        // console.log(error.message)
         res.json({success:false, message:error.message})
     }
 } 
@@ -258,10 +263,10 @@ export const reviewResume=async(req,res)=>{
           const resume=req.file;
           const plan=req.plan;
 
-        //   if(plan !== 'premium')
-        //   {
-        //     return res.json({success:false, message:"This feature is only available for premium subscriptions."})
-        //   }        
+          if(plan !== 'premium')
+          {
+            return res.json({success:false, message:"This feature is only available for premium subscriptions."})
+          }        
             
            // Checking resume is greater than 5mb
             if(resume.size > 5*1024*1024){
@@ -272,7 +277,9 @@ export const reviewResume=async(req,res)=>{
             const dataBuffer=fs.readFileSync(resume.path)
 
             //to parse the text from the resume
-            const pdfData=await pdf(dataBuffer)
+            // const pdfData=await pdf(dataBuffer)
+            const pdfData = await pdf(dataBuffer);
+            // console.log(pdfData.text)
             const prompt=`Review the following resume and provide constructive feedback on its strengths,weaknesses and areas for improvement. 
             Resume Content:\n\n ${pdfData.text}`
 
@@ -286,7 +293,7 @@ export const reviewResume=async(req,res)=>{
                     },
                 ],
                 temperature:0.7,
-                max_tokens:1000,
+                max_tokens:4500,
             }); 
 
             const content=response.choices[0].message.content;
@@ -297,10 +304,11 @@ export const reviewResume=async(req,res)=>{
             [userId, prompt, content, "review-resume"]
             );
                    
+            // console.log("resume success")
             res.json({success:true, content:content})
     }
     catch(error){
-        console.log(error.message)
+        // console.log("resume error",error.message)
         res.json({success:false, message:error.message})
     }
 }

@@ -3,6 +3,8 @@ import './WriteArticle.css'
 import { Sparkles, Image } from 'lucide-react';
 import { useState } from 'react';
 import axios from "axios";
+import toast from "react-hot-toast";
+
 
 
 function GenerateImages() {
@@ -14,40 +16,72 @@ function GenerateImages() {
   const [selectedStyle,setSelectedStyle]= useState('Realistic');
   const [input,setInput]= useState('');
   const [publish,setPublish]= useState(false);
+  const [loading,setLoading]=useState(false)
+  const [content,setContent]=useState('')
 
   // const onSubmitHandler=async(e)=>{
   //         e.preventDefault();
   //   }
 
 
+  const onSubmitHandler=async(e)=>{
+        e.preventDefault(); 
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
+        try{
+              setLoading(true)
 
-    if (!input.trim()) return;
+              const prompt=`Generate an image of  ${input} in the style ${selectedStyle}`
 
-    try {
+              const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/ai/generate-image`,
+                            {prompt,publish},
+                            {
+                              withCredentials: true, 
+                            }
+                            
+                          ) 
+              // console.log(data)
+              if(data.success)
+              {
+                setContent(data.content)
+              } else{
+                toast.error(data.message)
+              }
 
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/ai/generate-image`,
-        {
-          prompt: `${input}, ${selectedStyle}`,
-          publish: true, 
-        },
-        {
-          withCredentials: true, // important for auth/session
-        }
-      );
+            } catch(error){
+                  toast.error(error.message)        
+            }
 
-      if (response.data.success) {
-        // setResult(response.data.image); // or secure_url
-        console.log("Generated image URL:", response.data.content);
-      }
+           setLoading(false)
+    }
 
-    } catch (error) {
-      console.error("Image generation failed:", error.response?.data || error.message);
-    } 
-  };
+
+  // const onSubmitHandler = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!input.trim()) return;
+
+  //   try {
+
+  //     const response = await axios.post(
+  //       `${import.meta.env.VITE_BASE_URL}/api/ai/generate-image`,
+  //       {
+  //         prompt: `${input}, ${selectedStyle}`,
+  //         publish: true, 
+  //       },
+  //       {
+  //         withCredentials: true, // important for auth/session
+  //       }
+  //     );
+
+  //     if (response.data.success) {
+  //       // setResult(response.data.image); // or secure_url
+  //       console.log("Generated image URL:", response.data.content);
+  //     }
+
+  //   } catch (error) {
+  //     console.error("Image generation failed:", error.response?.data || error.message);
+  //   } 
+  // };
 
 
   return (
@@ -86,8 +120,12 @@ function GenerateImages() {
                   <p className="toggle-text">Make this image Public</p>
               </div>
 
-               <button className="generate-button-image">
-                  <Image className="generate-icon" />
+               <button  disabled={loading} className="generate-button-image">
+                   {
+                    loading ?  <span className="spinner"></span>
+                    : <Image className="generate-icon" />
+
+                   }
                   Generate image
                 </button>
 
@@ -97,13 +135,23 @@ function GenerateImages() {
                 <Image className="header-icon-image" />
                 <h1 className="generated-title">Generated image</h1>
               </div>
-
+              
+               {!content ? (
               <div className="generated-body">
                 <div className="generated-empty">
                   <Image className="empty-icon" />
                   <p>Enter a topic and click "Generate image" to get started</p>
                 </div>
+              </div> 
+               ):
+
+               <div className="image-container">
+                  <img src={content} alt="image" />
               </div>
+
+
+
+              }
           </div>
 
     </div>

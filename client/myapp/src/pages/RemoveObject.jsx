@@ -2,13 +2,55 @@ import React from 'react'
 import './WriteArticle.css'
 import { Sparkles, Eraser, Scissors } from 'lucide-react';
 import { useState } from 'react';
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function RemoveObject() {
 
   const [input,setInput]= useState('');
   const [object, setObject] = useState('');
-  const onSubmitHandler=async(e)=>{
-          e.preventDefault();
+    const [loading,setLoading]=useState(false)
+    const [content,setContent]=useState('')
+  
+  // const onSubmitHandler=async(e)=>{
+  //         e.preventDefault();
+  //   }
+   
+ const onSubmitHandler=async(e)=>{
+        e.preventDefault(); 
+
+        try{
+              setLoading(true)
+              
+              if(object.split(' ').length > 1)
+              {
+                return toast('Please enter only one object name')
+              }
+
+              const formData=new FormData()
+              formData.append('image',input)
+              formData.append('object',object)
+              
+              const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/ai/remove-image-object`,
+                            formData,           
+                                {
+                                  withCredentials: true, 
+                                }
+                            
+                          ) 
+              // console.log(data)
+              if(data.success)
+              {
+                setContent(data.content)
+              } else{
+                toast.error(data.message)
+              }
+
+            } catch(error){
+                  toast.error(error.message)        
+            }
+
+           setLoading(false)
     }
 
   return (
@@ -30,8 +72,11 @@ function RemoveObject() {
                 placeholder="e.g., watch or spoon, Only single object name" required /> 
 
                
-               <button className="generate-button-object">
-                  <Scissors className="generate-icon" />
+               <button disabled={loading} className="generate-button-object">
+                   {
+                    loading ?  <span className="spinner"></span>
+                    : <Scissors className="generate-icon" />
+                    }
                   Remove Object
                 </button>
 
@@ -41,13 +86,23 @@ function RemoveObject() {
                 <Scissors className="header-icon-object" />
                 <h1 className="generated-title">Processed image</h1>
               </div>
+              
+              {   
+                !content ?( 
+                    <div className="generated-body">
+                      <div className="generated-empty">
+                        <Scissors className="empty-icon" />
+                        <p>Upload an image and click "Remove Object" to get started</p>
+                      </div>
+                    </div> 
+                ):( 
 
-              <div className="generated-body">
-                <div className="generated-empty">
-                  <Scissors className="empty-icon" />
-                  <p>Upload an image and click "Remove Object" to get started</p>
-                </div>
-              </div>
+                  <div className="image-container">
+                      <img src={content} alt=""/>
+                  </div>
+
+                )
+              }
           </div>
 
     </div>

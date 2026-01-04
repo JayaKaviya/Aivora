@@ -410,6 +410,22 @@
 
 
 
+.image-container {
+    margin-top: 0.75rem; 
+    height: 100%;         
+}
+
+
+.image-container img {
+    width: 100%;          
+    height: 100%;         
+    object-fit: cover;   
+    display: block;       
+}
+
+
+
+
 /* specific to generate-images page */
 .publish-toggle {
   margin: 1.5rem 0;

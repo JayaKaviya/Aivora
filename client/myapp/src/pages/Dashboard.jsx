@@ -5,13 +5,36 @@ import { useEffect,useState } from 'react'
 import { Sparkles,Gem } from 'lucide-react';
 import {Protect} from '@clerk/clerk-react'
 import CreationItem from '../components/CreationItem';
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
 
       const [creations, setCreations] = useState([])
+      const [loading,setLoading]=useState(true)
+
 
       const getDashboardData = async ()=>{
-           setCreations (dummyCreationData);
+          //  setCreations (dummyCreationData);
+
+           try{
+
+            const {data}=await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/get-user-creations`,
+              {
+                withCredentials: true, 
+              }
+            )  
+            if(data.success)
+            {
+              setCreations(data.creations)
+            } else{
+              toast.error(data.message)
+            }
+
+          }catch(error){
+                toast.error(error.message)
+          } 
+          setLoading(false)
       }
 
       useEffect (()=>{ 
@@ -49,14 +72,27 @@ const Dashboard = () => {
                         <Gem className="sparkles-icon" />
                     </div>
                 </div>
-            </div>
+            </div> 
 
-            <div className='recent-creations'>
+             { loading ? 
+             (
+                 <div className="loader-container">
+                    <span className="spinner"></span>
+                  </div>
+                              )
+             :
+             ( 
+
+                         <div className='recent-creations'>
                 <p className='recent-title'>Recent Creations</p>
                 {
                   creations.map((item)=> <CreationItem key={item.id} item={item} />)
                 }
             </div>
+              
+             ) }
+
+ 
       </div>
 
       )

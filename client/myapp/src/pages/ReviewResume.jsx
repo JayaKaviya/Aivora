@@ -2,13 +2,51 @@ import React from 'react'
 import './WriteArticle.css'
 import { Sparkles, Eraser, FileText } from 'lucide-react';
 import { useState } from 'react';
+import axios from "axios";
+import toast from "react-hot-toast";
+import Markdown from 'react-markdown';
 
 function ReviewResume()  {
 
   const [input,setInput]= useState('');
-  const onSubmitHandler=async(e)=>{
-          e.preventDefault();
+  const [loading,setLoading]=useState(false)
+  const [content,setContent]=useState('')
+
+  // const onSubmitHandler=async(e)=>{
+  //         e.preventDefault();
+  //   }
+
+   const onSubmitHandler=async(e)=>{
+        e.preventDefault(); 
+
+        try{
+              setLoading(true)
+
+              const formData=new FormData()
+              formData.append('resume',input)
+              
+              const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/ai/review-resume`,
+                            formData,           
+                                {
+                                  withCredentials: true, 
+                                }
+                            
+                          ) 
+              // console.log(data)
+              if(data.success)
+              {
+                setContent(data.content)
+              } else{
+                toast.error(data.message)
+              }
+
+            } catch(error){
+                  toast.error(error.message)        
+            }
+
+           setLoading(false)
     }
+
 
   return (
     <div className="article-container">
@@ -26,8 +64,11 @@ function ReviewResume()  {
                 Supports PDF resume only.
               </p>
 
-               <button className="generate-button-resume">
-                  <FileText className="generate-icon" />
+               <button disabled={loading}  className="generate-button-resume">
+                   {
+                    loading ?  <span className="spinner"></span>
+                    : <FileText className="generate-icon" />
+                   }
                   Review Resume
                 </button>
 
@@ -37,13 +78,30 @@ function ReviewResume()  {
                 <FileText className="header-icon-resume" />
                 <h1 className="generated-title">Analysis Results</h1>
               </div>
+             
+              {
+                !content ?(   
 
-              <div className="generated-body">
-                <div className="generated-empty">
-                  <FileText className="empty-icon" />
-                  <p>Upload a resume and click "Review Resume" to get started</p>
-                </div>
-              </div>
+                  <div className="generated-body">
+                    <div className="generated-empty">
+                      <FileText className="empty-icon" />
+                      <p>Upload a resume and click "Review Resume" to get started</p>
+                    </div>
+                  </div> 
+                ):
+
+                  typeof content === "string" && content.trim() !== "" ? (
+                      <div className="custom-class">
+                        <div className="reset-tw">
+                          <Markdown>{content}</Markdown>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="generated-empty">
+                        <p>No content generated yet</p>
+                      </div>
+                    )
+              }
           </div>
 
     </div>
