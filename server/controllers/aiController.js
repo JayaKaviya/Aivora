@@ -82,7 +82,7 @@ export const generateBlogTitle=async(req,res)=>{
     try{  
         //clerk userId
           const {userId}=req.auth(); 
-          const {prompt,category}=req.body;
+          const {prompt}=req.body;
           const plan=req.plan;
           const free_usage=req.free_usage;
 
@@ -99,7 +99,7 @@ export const generateBlogTitle=async(req,res)=>{
                             content: prompt,
                            }],
                 temperature:0.7,
-                max_tokens:100,
+                max_tokens:2500,
             }); 
 
             const content=response.choices[0].message.content;

@@ -3,6 +3,10 @@ import './WriteArticle.css'
 import { Sparkles,Edit, Hash } from 'lucide-react';
 import { useState } from 'react';
 import axios from "axios";
+import toast from "react-hot-toast";
+import Markdown from 'react-markdown';
+
+
 function BlogTitle() {
 
    const blobCategories=[
@@ -11,37 +15,72 @@ function BlogTitle() {
 
   const [selectedCategory,setSelectedCategory]= useState('General');
   const [input,setInput]= useState('');
+    const [loading,setLoading]=useState(false)
+    const [content,setContent]=useState('')
 
   // const onSubmitHandler=async(e)=>{
   //         e.preventDefault();
   //   }
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
 
-    if (!input.trim()) return;
+  
+ const onSubmitHandler=async(e)=>{
+        e.preventDefault(); 
 
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/ai/generate-blog-title`,
-        {
-          prompt: input,
-          category: selectedCategory,
-        },
-        {
-          withCredentials: true, // important if auth/session is used
-        }
-      );
+        try{
+              setLoading(true)
 
-      console.log("Generated Titles Response:", response.data);
+              const prompt=`Generate a blog title for the keyword ${input} in the category ${selectedCategory}`
 
-    } catch (error) {
-      console.error(
-        "Title generation failed:",
-        error.response?.data || error.message
-      );
+              const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/ai/generate-blog-title`,
+                            {prompt},
+                            
+                                {
+                                  withCredentials: true, 
+                                }
+                            
+                          ) 
+              console.log(data)
+              if(data.success)
+              {
+                setContent(data.content)
+              } else{
+                toast.error(data.message)
+              }
+
+            } catch(error){
+                  toast.error(error.message)        
+            }
+
+           setLoading(false)
     }
-  };
+
+  // const onSubmitHandler = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!input.trim()) return;
+
+  //   try {
+  //     const response = await axios.post(
+  //       `${import.meta.env.VITE_BASE_URL}/api/ai/generate-blog-title`,
+  //       {
+  //         prompt: input,
+  //         category: selectedCategory,
+  //       },
+  //       {
+  //         withCredentials: true, // important if auth/session is used
+  //       }
+  //     );
+
+  //     console.log("Generated Titles Response:", response.data);
+
+  //   } catch (error) {
+  //     console.error(
+  //       "Title generation failed:",
+  //       error.response?.data || error.message
+  //     );
+  //   }
+  // };
 
   return (
     <div className="article-container">
@@ -62,8 +101,13 @@ function BlogTitle() {
                   }
                 </div>
                 <br />
-               <button className="generate-button">
-                  <Hash className="generate-icon" />
+               <button disabled={loading} className="generate-button">
+
+                {
+                  loading ?  <span className="spinner"></span>
+                  :  <Hash className="generate-icon" />
+                 }  
+                 
                   Generate title
                 </button>
 
@@ -73,13 +117,29 @@ function BlogTitle() {
                 <Hash className="header-icon-blob" />
                 <h1 className="generated-title">Generated titles</h1>
               </div>
+              
+                {!content ? (
+                      <div className="generated-body">
+                        <div className="generated-empty">
+                          <Hash className="empty-icon" />
+                          <p>Enter a topic and click "Generated title" to get started</p>
+                        </div>
+                      </div>  
+                ): 
 
-              <div className="generated-body">
-                <div className="generated-empty">
-                  <Hash className="empty-icon" />
-                  <p>Enter a topic and click "Generated title" to get started</p>
-                </div>
-              </div>
+                typeof content === "string" && content.trim() !== "" ? (
+                  <div className="custom-class">
+                    <div className="reset-tw">
+                      <Markdown>{content}</Markdown>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="generated-empty">
+                    <p>No content generated yet</p>
+                  </div>
+                )
+              }
+              
           </div>
 
     </div>
