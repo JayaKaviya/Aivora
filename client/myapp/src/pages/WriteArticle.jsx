@@ -3,8 +3,10 @@ import './WriteArticle.css'
 import { Sparkles,Edit } from 'lucide-react';
 import { useState } from 'react';
 import axios from "axios";
+import toast from "react-hot-toast";
+import Markdown from 'react-markdown';
 
-axios.defaults.baseURL=import.meta.env.VITE_BASE_URL;
+// axios.defaults.baseURL=import.meta.env.VITE_BASE_URL;
 
 function WriteArticle() {
   
@@ -20,27 +22,23 @@ function WriteArticle() {
   
   // const {getToken}= useAuth()
 
-  const onSubmitHandler=async()=>{
+ const onSubmitHandler=async(e)=>{
         e.preventDefault(); 
 
         try{
               setLoading(true)
 
-              const token = localStorage.getItem("token");
-              if (!token) {
-                throw new Error("User not authenticated");
-              }
               const prompt=`Write an article about ${input} in ${selectedLength.text}`
 
-              const {data}=await axios.post('/api/ai/generate-article',
+              const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/ai/generate-article`,
                             {prompt, length:selectedLength.length},
-                            {
-                              headers: {
-                                Authorization: `Bearer ${token}`,
-                              }
-                            }
+                            
+                                {
+                                  withCredentials: true, 
+                                }
+                            
                           ) 
-
+              // console.log(data)
               if(data.success)
               {
                 setContent(data.content)
@@ -54,6 +52,7 @@ function WriteArticle() {
 
            setLoading(false)
     }
+
 
       // const onSubmitHandler = async (e) => {
       //   e.preventDefault();
@@ -79,7 +78,7 @@ function WriteArticle() {
       //     );
       //   }
       // };
-
+                  console.log("CONTENT TYPE:", typeof content, content);
 
   return (
     <div className="article-container">
@@ -115,21 +114,26 @@ function WriteArticle() {
                 <Edit className="header-icon" />
                 <h1 className="generated-title">Generate Article</h1>
               </div> 
-
+              
                {!content ? (
-                  <div className="generated-body">
-                    <div className="generated-empty">
-                      <Edit className="empty-icon" />
-                      <p>Enter a topic and click "Generate article" to get started</p>
-                    </div>
-                  </div>    
-               ) : (
-                 <div classname='custom-class'>
-                      <div>
-                        {content}
+                    <div className="generated-body">
+                      <div className="generated-empty">
+                        <Edit className="empty-icon" />
+                        <p>Enter a topic and click "Generate article" to get started</p>
                       </div>
-                  </div>
-
+                    </div>
+                  ) : 
+                  
+                  typeof content === "string" && content.trim() !== "" ? (
+                    <div className="custom-class">
+                      <div className="reset-tw">
+                        <Markdown>{content}</Markdown>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="generated-empty">
+                      <p>No content generated yet</p>
+                    </div>
                )}
              
           </div>

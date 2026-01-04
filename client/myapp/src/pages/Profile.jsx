@@ -3,7 +3,7 @@ import React from 'react'
 function Profile({user}) {
     const logout=()=>{
     window.open(
-      `${import.meta.env.VITE_API_URL}/auth/logout`,
+      `${import.meta.env.VITE_BASE_URL}/auth/logout`,
       '_self'
     );
   }

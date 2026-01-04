@@ -5,7 +5,7 @@ import styles from './style.module.css'
 function Signup() {
   const googleAuth=()=>{
     window.open(
-     `${import.meta.env.VITE_API_URL}/auth/google/callback`,
+     `${import.meta.env.VITE_BASE_URL}/auth/google/callback`,
       '_self'
     );
   }

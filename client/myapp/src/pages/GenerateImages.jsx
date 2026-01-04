@@ -4,6 +4,7 @@ import { Sparkles, Image } from 'lucide-react';
 import { useState } from 'react';
 import axios from "axios";
 
+
 function GenerateImages() {
 
    const imageStyle=[ 'Realistic','Ghibli Style', 'Anime Style',
@@ -28,7 +29,7 @@ function GenerateImages() {
     try {
 
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/ai/generate-image`,
+        `${import.meta.env.VITE_BASE_URL}/api/ai/generate-image`,
         {
           prompt: `${input}, ${selectedStyle}`,
           publish: true, 

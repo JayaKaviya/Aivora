@@ -13,6 +13,13 @@ const AI = new OpenAI({
     baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
 });
 
+const tokenMap = {
+  800: 1800,
+  1200: 2400,
+  1600: 3000,
+};
+
+
 
 export const generateArticle=async(req,res)=>{
 
@@ -22,14 +29,16 @@ export const generateArticle=async(req,res)=>{
           const {prompt,length}=req.body;
           const plan=req.plan;
           const free_usage=req.free_usage;
-
+          console.log("Prompt:", prompt, "Length:", length);
           if(plan !== 'premium' && free_usage>=50)
           {
             return res.json({success:false, message:"Limit reached.Upgrade to continue."})
           }
 
-        //   console.log("Generating article for user:", userId, "with plan:", plan, "and free usage:", free_usage,"prompt:",prompt,"length:",length);
-           const response = await AI.chat.completions.create({
+        // console.log("Generating article for user:", userId, "with plan:", plan, "and free usage:", free_usage,"prompt:",prompt,"length:",length);
+       
+        
+        const response = await AI.chat.completions.create({
                 model: "gemini-2.5-flash",
                 messages: [
                     {
@@ -39,14 +48,11 @@ export const generateArticle=async(req,res)=>{
                     },
                 ],
                 temperature:0.7,
-                max_tokens:length,
+                max_tokens:tokenMap[length],
             }); 
 
             const content=response.choices[0].message.content;
-
-            // await db`INSERT INTO creations(user_id,prompt,content, type) 
-            // VALUES(${userId}, ${prompt}, ${content},'article')`;
-
+            
             await db.execute(
             `INSERT INTO creations (user_id, prompt, content, type)
             VALUES (?, ?, ?, ?)`,
@@ -59,11 +65,12 @@ export const generateArticle=async(req,res)=>{
                         free_usage: free_usage + 1
                     }
                 })
-            }
+            } 
+            //  console.log("Response to frontend:", { success: true, content });
             res.json({success:true, content})
     }
     catch(error){
-        console.log(error.message)
+        // console.log("Error generating article:", error.message);
         res.json({success:false, message:error.message})
     }
 

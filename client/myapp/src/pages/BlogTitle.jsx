@@ -23,7 +23,7 @@ function BlogTitle() {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/ai/generate-blog-title`,
+        `${import.meta.env.VITE_BASE_URL}/api/ai/generate-blog-title`,
         {
           prompt: input,
           category: selectedCategory,

@@ -5,7 +5,7 @@ import styles from './style.module.css'
 function Login() {
   const googleAuth=()=>{
     window.open(
-      `${import.meta.env.VITE_API_URL}/auth/google`,
+      `${import.meta.env.VITE_BASE_URL}/auth/google`,
       '_self'
     );
   }

@@ -28,17 +28,19 @@ function App() {
      
         if (data.user && data.user._json) {
           setUser(data.user._json);
-          localStorage.setItem("token", data.token);
+          // localStorage.setItem("token", data.token);
         }
 
 		} catch (err) {
-        if (err.response && err.response.status === 403) {
-          // ✅ 403 just means "not logged in" — ignore it silently
-          console.log("User not logged in yet");
-        } else {
-          console.error("Unexpected error fetching user:", err);
+        const status = err.response?.status;
+
+        if (status === 401 || status === 403) {
+          // normal unauthenticated state
+          return;
         }
-      }
+
+        console.error("Unexpected error fetching user:", err);
+  }
 	};
 
 	useEffect(() => {

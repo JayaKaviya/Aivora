@@ -44,7 +44,9 @@ app.use(
         saveUninitialized: false,         // don’t create session until something stored
         cookie: {
             maxAge: 24 * 60 * 60 * 1000 , // 24 hours
-             sameSite: "lax"
+             sameSite: "lax",
+              secure: false, // true only in HTTPS
+            httpOnly: true,
         }
     })
 );
@@ -62,17 +64,17 @@ app.use( cors({
 // app.use(cors())
 app.use(express.json())
 
+
+//Routes
+app.use("/auth", authRoute);
+
 //Clerk
 app.use(clerkMiddleware())
 app.use(requireAuth())
 
-//Routes
-app.use("/auth", authRoute);
 // app.use("/", router);
 app.use('/api/ai',aiRouter);
 app.use('/api/user',userRouter);
-
-
 
 const port=process.env.PORT || 8000; 
 app.listen(port,()=>{
