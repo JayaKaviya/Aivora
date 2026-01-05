@@ -88,11 +88,12 @@ export const generateBlogTitle=async(req,res)=>{
           const {prompt}=req.body;
           const plan=req.plan;
           const free_usage=req.free_usage;
-
-          if(plan !== 'premium' && free_usage>=50)
-          {
-            return res.json({success:false, message:"Limit reached.Upgrade to continue."})
-          }
+         
+          //For Demo , Premium is locked
+        //   if(plan !== 'premium' && free_usage>=50)
+        //   {
+        //     return res.json({success:false, message:"Limit reached.Upgrade to continue."})
+        //   }
 
         //   console.log("Generating Blob title for user:", userId, "with plan:", plan, "and free usage:", free_usage,"prompt:",prompt);
            const response = await AI.chat.completions.create({
@@ -137,11 +138,12 @@ export const generateImage=async(req,res)=>{
           const {userId}=req.auth(); 
           const {prompt,publish}=req.body;
           const plan=req.plan;
-
-          if(plan !== 'premium')
-          {
-            return res.json({success:false, message:"This feature is only available for premium subscriptions."})
-          }
+            
+           //For Demo , Premium is locked
+        //   if(plan !== 'premium')
+        //   {
+        //     return res.json({success:false, message:"This feature is only available for premium subscriptions."})
+        //   }
 
         //    console.log("Generating Image for user:", userId, "with plan:", plan,"prompt:",prompt,"publish:",publish);
              
@@ -184,7 +186,8 @@ export const removeImageBackground=async(req,res)=>{
           const {userId}=req.auth(); 
           const image=req.file;
           const plan=req.plan;
-
+         
+           //For Demo , Premium is locked
         //   if(plan !== 'premium')
         //   {
         //     return res.json({success:false, message:"This feature is only available for premium subscriptions."})
@@ -226,11 +229,12 @@ export const removeImageObject=async(req,res)=>{
           const {object} =req.body;
           const image=req.file;
           const plan=req.plan;
-
-          if(plan !== 'premium')
-          {
-            return res.json({success:false, message:"This feature is only available for premium subscriptions."})
-          }        
+          
+           //For Demo , Premium is locked
+        //   if(plan !== 'premium')
+        //   {
+        //     return res.json({success:false, message:"This feature is only available for premium subscriptions."})
+        //   }        
     
             //cloudinary
             const {public_id}=await cloudinary.uploader.upload(image.path);
@@ -262,11 +266,12 @@ export const reviewResume=async(req,res)=>{
           const {userId}=req.auth(); 
           const resume=req.file;
           const plan=req.plan;
-
-          if(plan !== 'premium')
-          {
-            return res.json({success:false, message:"This feature is only available for premium subscriptions."})
-          }        
+         
+           //For Demo , Premium is locked
+        //   if(plan !== 'premium')
+        //   {
+        //     return res.json({success:false, message:"This feature is only available for premium subscriptions."})
+        //   }        
             
            // Checking resume is greater than 5mb
             if(resume.size > 5*1024*1024){
