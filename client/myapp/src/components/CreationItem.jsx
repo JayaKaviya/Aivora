@@ -10,8 +10,13 @@ function CreationItem({item}) {
   return (
     <div onClick={()=> setExpanded(!expanded)}className="creation-item">    
        <div  className="creation-header">
-           <div>
-                <h2>{item.prompt}</h2> 
+           <div> 
+                {
+                   item.type === 'review-resume'
+                    ? <h2>Review the resume</h2>
+                    : <h2>{item.prompt}</h2>
+                }
+
                 <p className='item-meta'>{item.type} - {new Date(item.created_at).toLocaleDateString()}</p>          
             </div>
             <button className='item-type-btn'>{item.type}</button>

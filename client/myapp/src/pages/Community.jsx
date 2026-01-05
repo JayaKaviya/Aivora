@@ -78,6 +78,7 @@ function Community({user}) {
 
             <div className="creations_content">
                 {creations.map((creation, index) => (
+                  
                     <div key={index} className="creation-card">
                         <img src={creation.content} alt="" className="creation-image"/>
 
@@ -87,12 +88,12 @@ function Community({user}) {
                               <div className="creation-likes">
                                 <p>{creation.likes.length}</p>
 
-                              <Heart
+                          <Heart 
                               onClick={() => imageLikeToggle(creation.id)}
                               className="heart-icon"
                               fill={creation.likes.includes(user.id) ? "#ef4444" : "none"}
                               stroke={creation.likes.includes(user.id) ? "#ef4444" : "#ffffff"}
-                            />
+                            />  
 
 
                               </div>

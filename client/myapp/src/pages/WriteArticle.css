@@ -36,31 +36,31 @@
 .blob-icon{
     width: 1.5rem;
     height: 1.5rem;
-    color: #8E37EB;
+    color: #4A7AFF;
 }
 
 .image-icon{
     width: 1.5rem;
     height: 1.5rem;
-    color: #00AD25;
+    color: #4A7AFF;
 }
 
 .bg-icon{
     width: 1.5rem;
     height: 1.5rem;
-    color: #FF4938;
+   color: #4A7AFF;
 }
 
 .object-icon{
   width: 1.5rem;
     height: 1.5rem;
-    color: #4A7AFF;
+     color: #4A7AFF;
 }
 
 .resume-icon{
   width: 1.5rem;
   height: 1.5rem;
-  color: #00DA83;
+  color: #4A7AFF;
 }
 
 
@@ -135,14 +135,14 @@
 }
 
 .length-blob-active {
-  background-color: #d532e1;
-  color: #f8f5f8;
+   background-color: #eff6ff;
+  color: #1d4ed8;
   border-color: #bfdbfe;
 }
 
 .length-image-active{
-  background-color: #e7faef;
-  color: #097c2f;
+   background-color: #eff6ff;
+  color: #1d4ed8;
   border-color: #bfdbfe;
 }
 
@@ -174,7 +174,7 @@
   align-items: center;
   gap: 0.5rem;
 
-  background: linear-gradient(to right, #00AD25, #04FF50);
+  background: linear-gradient(to right, #C341F6, #8E37EB);
   color: #ffffff;
 
   padding: 0.5rem 1rem;
@@ -193,8 +193,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-
-  background: linear-gradient(to right, #F6AB41, #FF4938);
+ background: linear-gradient(to right, #C341F6, #8E37EB);
   color: #ffffff;
 
   padding: 0.5rem 1rem;
@@ -214,7 +213,7 @@
   align-items: center;
   gap: 0.5rem;
 
-  background: linear-gradient(to right, #417DF6, #8E37EB);
+  background: linear-gradient(to right, #C341F6, #8E37EB);
   color: #ffffff;
 
   padding: 0.5rem 1rem;
@@ -234,7 +233,7 @@
   align-items: center;
   gap: 0.5rem;
 
-  background: linear-gradient(to right, #00DA83, #009bb3);
+ background: linear-gradient(to right, #C341F6, #8E37EB);
   color: #ffffff;
 
   padding: 0.5rem 1rem;
@@ -321,19 +320,19 @@
 .header-icon-blob {
   width: 1.25rem;
   height: 1.25rem;
-  color: #8E37EB;
+  color: #4A7AFF;
 }
 
 .header-icon-image{
     width: 1.25rem;
   height: 1.25rem;
-  color: #00AD25;
+  color: #4A7AFF;
 }
 
 .header-icon-bg{
     width: 1.25rem;
   height: 1.25rem;
-  color: #FF4938;
+  color: #4A7AFF;
 }
 
 .header-icon-object{
@@ -345,7 +344,7 @@
 .header-icon-resume{
   width: 1.25rem;
   height: 1.25rem;
-  color: #00DA83;
+ color: #4A7AFF;
 }
   
 
@@ -466,7 +465,7 @@
 }
 
 .toggle-input:checked + .toggle-track {
-  background-color: #22c55e;
+  background-color: #196eed;
 }
 
 .toggle-input:checked ~ .toggle-thumb {
