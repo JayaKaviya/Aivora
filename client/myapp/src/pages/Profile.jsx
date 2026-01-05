@@ -15,7 +15,7 @@ function Profile({user}) {
          <h1 className="heading">PROFILE</h1>
          <div className="form_container">
               <div className="left">
-                   <img  className="img" src='./profile.jpg' alt='profile'/>
+                   <img  className="img" src='./profile.png' alt='profile'/>
               </div>
               <div className="right">
                     <h2 className="form_heading">Profile</h2> 

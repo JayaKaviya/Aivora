@@ -5,8 +5,9 @@ import {Toaster} from 'react-hot-toast'
 import './App.css'
 
 import Home from './pages/Home';
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+// import Login from "./pages/Login";
+// import Signup from "./pages/Signup";
+import Auth from './pages/Auth';
 import Profile from './pages/Profile';
 import Layout from './pages/Layout';
 import Dashboard from './pages/Dashboard'
@@ -53,14 +54,17 @@ function App() {
           <Toaster />
           <BrowserRouter>
               <Routes>
-                  <Route path='/' element={user ? <Home user={user} /> : <Navigate to="/login" />}/>
-                  <Route path="/login" element={user ? <Navigate to="/" /> : <Login />}/>
-                  <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />}  />
-                  <Route path="/profile"  element={user ? <Profile user={user} /> : <Navigate to="/login"/>}  />
-                  <Route path='/ai' element={ user ? <Layout user={user}/> : <Navigate to="/login"/>}>
+                  <Route path='/' element={user ? <Home user={user} /> : <Navigate to="/auth" />}/>
+                  {/* <Route path="/login" element={user ? <Navigate to="/" /> : <Login />}/>
+                  <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />}  /> */}
+
+                   <Route path="/auth" element={user ? <Navigate to="/" /> : <Auth />}  />
+
+                  <Route path="/profile"  element={user ? <Profile user={user} /> : <Navigate to="/auth"/>}  />
+                  <Route path='/ai' element={ user ? <Layout user={user}/> : <Navigate to="/auth"/>}>
                         <Route index element={<Dashboard/>}/>
                         <Route path='blog-titles' element={<BlogTitle/>}/>
-                        <Route path='community' element={ user ? <Community user={user}/> : <Navigate to="/login"/>}/>
+                        <Route path='community' element={ user ? <Community user={user}/> : <Navigate to="/auth"/>}/>
                         <Route path='generate-images' element={<GenerateImages/>}/>
                         <Route path='remove-background' element={<RemoveBackground/>}/>
                         <Route path='remove-object' element={<RemoveObject/>}/>

@@ -15,7 +15,7 @@ function Login() {
          <h1 className={styles.heading}>LOGIN FORM</h1>
          <div className={styles.form_container}>
               <div className={styles.left}>
-                   <img  className={styles.img} src='/login.jpg' alt='login'/>
+                   <img  className={styles.img} src='/login.png' alt='login'/>
               </div>
               <div className={styles.right}>
                     <h2 className={styles.form_heading}>Members Log in</h2> 

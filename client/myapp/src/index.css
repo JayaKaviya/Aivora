@@ -44,7 +44,7 @@
     justify-content: center;
 }
 
-.heading::after {
+/* .heading::after {
     content: "";
     width: 450px;
     height: 4px;
@@ -52,7 +52,7 @@
     bottom: -20px;
     background-color: #2c444e;
     position: absolute;
-}
+} */
 
 .form_container {
     display: flex;
@@ -83,10 +83,11 @@
 }
 
 .img {
-    width: 160%;
+    width: 100%;
     position: absolute;
-    left: -60px;
+    left: -0px;
     top: -50px;
+    height:120%
 }
 
 .right {
@@ -127,7 +128,7 @@
     font-weight: 500;
     padding: 12px 25px;
     color: white;
-    background-color: #ffc801;
+    background-color: #650ba1;
     border-radius: 12px;
     margin: 10px 0 0 0;
     outline: none;
@@ -145,7 +146,7 @@
 .text > a{
     font-size: 16px;
     font-weight: 500;
-    color: #ffc801;
+    color: #8808af;
 }
 
 .reset-tw, .reset-tw * {
@@ -155,3 +156,4 @@
 .cl-drawerRoot{
   z-index:510;
 }
+

@@ -25,12 +25,15 @@ function Home(userDetails) {
 
   return (
     <div >
-      <Navbar/> 
-      <Hero/>
-      <AiTools user={user}/>
-      <Testimonial />
-      <Plan />
-      <Footer />
+      <Navbar/>
+      <br/> <br/>
+      <div >
+          <Hero/>
+          <AiTools user={user}/>
+          <Testimonial />
+          <Plan />
+          <Footer />
+      </div>
     </div>
   )
 }
