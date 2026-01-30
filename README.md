@@ -80,10 +80,6 @@ CLIENT_SECRET=your_google_client_secret
 # Client App URL
 CLIENT_URL=http://localhost:5173
 
-# Session & JWT Security
-SESSION_KEY=your_session_secret
-JWT_SECRET=your_jwt_secret
-
 # Clever Cloud MySQL Configuration
 MYSQL_ADDON_HOST=
 MYSQL_ADDON_DB=
@@ -122,7 +118,7 @@ cd Aivora
 Install client dependencies:
 
 ```
-cd client
+cd client\myapp
 npm install
 ```
 
@@ -147,7 +143,7 @@ npm run dev
 Start frontend:
 
 ```
-cd client
+cd client\myapp
 npm run dev
 ```
 
