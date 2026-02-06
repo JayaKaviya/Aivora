@@ -44,8 +44,10 @@ app.use(
         saveUninitialized: false,         // don’t create session until something stored
         cookie: {
             maxAge: 24 * 60 * 60 * 1000 , // 24 hours
-             sameSite: "lax",
-              secure: false, // true only in HTTPS
+            sameSite: "none",
+            secure: true,
+            //  sameSite: "lax",
+            //   secure: false, // true only in HTTPS
             httpOnly: true,
         }
     })
