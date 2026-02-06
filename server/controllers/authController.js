@@ -16,6 +16,10 @@ export const googleCallback = passport.authenticate("google", {
 // Login success
 export const loginSuccess = (req, res) => {
   if (req.user) {
+
+    console.log("USER:", req.user);
+    console.log("SESSION:", req.session);
+
     res.status(200).json({
       error: false,
       message: "Successfully Logged In",

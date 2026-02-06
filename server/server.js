@@ -13,7 +13,7 @@ import "./passport.js";
 import authRoute from "./routes/auth.js";
 
 // Session management
-import cookieSession from "cookie-session";
+// import cookieSession from "cookie-session";
 import session from "express-session";
 
 // Cloudinary configuration
@@ -35,6 +35,7 @@ const app=express();
 //     )
 // ) 
 
+app.set("trust proxy", 1);
 await connectCloudinary();
 
 
