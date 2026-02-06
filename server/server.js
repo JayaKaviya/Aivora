@@ -1,4 +1,5 @@
-import {clerkMiddleware,requireAuth} from '@clerk/express'
+// import {clerkMiddleware,requireAuth} from '@clerk/express'
+import {clerkMiddleware} from '@clerk/express'
 
 // Core server setup
 import express from 'express';
@@ -75,12 +76,15 @@ app.use(express.json())
 app.use("/auth", authRoute);
 
 //Clerk
-app.use(clerkMiddleware())
-app.use(requireAuth())
+// app.use(clerkMiddleware())
+// app.use(requireAuth())
 
 // app.use("/", router);
-app.use('/api/ai',aiRouter);
-app.use('/api/user',userRouter);
+// app.use('/api/ai',aiRouter);
+// app.use('/api/user',userRouter);
+app.use('/api/ai', clerkMiddleware(), aiRouter);
+app.use('/api/user', clerkMiddleware(), userRouter);
+
 
 const port=process.env.PORT || 8000; 
 app.listen(port,()=>{
