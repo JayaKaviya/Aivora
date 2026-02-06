@@ -37,6 +37,14 @@ const app=express();
 
 await connectCloudinary();
 
+
+app.use( cors({
+    //frontend url
+    origin: process.env.CLIENT_URL,
+    methods: "GET, POST, PUT, DELETE",
+    credentials : true
+})) 
+
 app.use(
     session({
         secret: process.env.SESSION_KEY, // your session key
@@ -56,12 +64,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session()); 
 
-app.use( cors({
-    //frontend url
-    origin: process.env.CLIENT_URL,
-    methods: "GET, POST, PUT, DELETE",
-    credentials : true
-})) 
+
 
 // app.use(cors())
 app.use(express.json())
