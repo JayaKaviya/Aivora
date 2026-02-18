@@ -3,13 +3,14 @@ import { clerkClient } from "@clerk/express";
 export const auth = async (req, res, next) => {
   try {
   
+      console.log("🔥 AUTH MIDDLEWARE HIT");
     if (!req.user || !req.isAuthenticated()) {
       return res.status(401).json({
         success: false,
         message: "Not authenticated",
       });
     }
-
+     console.log("user authenticated");
     console.log("🔍 Google user email:", req.user.email);
 
     const users = await clerkClient.users.getUserList({
