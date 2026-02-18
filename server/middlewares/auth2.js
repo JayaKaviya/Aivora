@@ -10,11 +10,14 @@ export const auth = async (req, res, next) => {
       });
     }
 
-    const email = req.user.email;
+    console.log("🔍 Google user email:", req.user.email);
 
     const users = await clerkClient.users.getUserList({
-      emailAddress: [email],
+      emailAddress: [req.user.email],
     });
+
+    console.log("🔍 Clerk users found:", users.length);
+
 
     if (!users.length) {
       return res.status(401).json({
