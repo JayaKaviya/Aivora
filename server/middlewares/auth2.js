@@ -21,6 +21,7 @@ export const auth = async (req, res, next) => {
 
 
     if (!users.length) {
+      console.log("inside try : no clerk users")
       return res.status(401).json({
         success: false,
         message: "Choose your plan (Free or Premium) to use the features of Aivora.",
