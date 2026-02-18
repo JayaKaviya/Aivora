@@ -82,8 +82,8 @@ app.use(clerkMiddleware())
 // app.use("/", router);
 // app.use('/api/ai',aiRouter);
 // app.use('/api/user',userRouter);
-app.use('/api/ai', clerkMiddleware(), aiRouter);
-app.use('/api/user', clerkMiddleware(), userRouter);
+app.use('/api/ai', aiRouter);
+app.use('/api/user', userRouter);
 
 
 const port=process.env.PORT || 8000; 
