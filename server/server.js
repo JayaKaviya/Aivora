@@ -76,7 +76,7 @@ app.use(express.json())
 app.use("/auth", authRoute);
 
 //Clerk
-// app.use(clerkMiddleware())
+app.use(clerkMiddleware())
 // app.use(requireAuth())
 
 // app.use("/", router);

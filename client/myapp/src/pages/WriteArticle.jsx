@@ -78,7 +78,7 @@ function WriteArticle() {
       //     );
       //   }
       // };
-                  console.log("CONTENT TYPE:", typeof content, content);
+                  // console.log("CONTENT TYPE:", typeof content, content);
 
   return (
     <div className="article-container">
