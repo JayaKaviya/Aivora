@@ -77,7 +77,7 @@ app.use("/auth", authRoute);
 
 //Clerk
 app.use(clerkMiddleware())
-// app.use(requireAuth())
+app.use(requireAuth())
 
 // app.use("/", router);
 // app.use('/api/ai',aiRouter);
