@@ -170,9 +170,38 @@ http://localhost:5173
 
 ## 📸 Screenshots
 
+# Welcome Page - Google SIGN IN 
+
+<img width="1913" height="959" alt="image" src="https://github.com/user-attachments/assets/0845b43b-af60-490f-9ca7-9af733192acb" />
+
+# Profile Page - Data from google 
+<img width="1917" height="965" alt="image" src="https://github.com/user-attachments/assets/7f246441-adf8-4834-8f59-2649d47ccac2" />
+
+# Home Page 
+<img width="1920" height="949" alt="image" src="https://github.com/user-attachments/assets/c211ccd5-c1a0-47dd-b682-b38ab2a0f0de" /> 
+
+# Tools 
+<img width="1920" height="964" alt="image" src="https://github.com/user-attachments/assets/9c329525-600f-4faa-84be-c3b6320134d5" />
+
+# Testimonials 
+<img width="1917" height="960" alt="image" src="https://github.com/user-attachments/assets/72249cbd-cddc-4c62-8f6b-788b871558c8" /> 
+
+# Plans
+
+<img width="1910" height="952" alt="image" src="https://github.com/user-attachments/assets/20667156-de43-4cb3-aefe-84d0133bc180" /> 
+
+# Footer 
+<img width="1915" height="969" alt="image" src="https://github.com/user-attachments/assets/6232caf0-a1d7-4004-818a-4418c7d6f13f" />
+
+
+
+## AIVORA FEATURES 
+
 # Dashboard 
 
 <img width="1914" height="874" alt="Screenshot 2026-01-05 114538" src="https://github.com/user-attachments/assets/ded9d60b-0a41-4db0-bfe1-e9366ca98454" />
+<br/>
+<img width="1915" height="965" alt="image" src="https://github.com/user-attachments/assets/52ed2bbd-54df-43e2-8121-98bc3d3dfabf" />
 <br/>
 <img width="1918" height="872" alt="Screenshot 2026-01-05 114613" src="https://github.com/user-attachments/assets/f21e574d-ba16-49f9-829e-192e9d759cd8" />
 
@@ -209,7 +238,7 @@ http://localhost:5173
 # Validation in Free Plan
 <img width="1920" height="867" alt="Screenshot 2026-01-04 215951" src="https://github.com/user-attachments/assets/a65dfad5-a215-40e9-9492-16f7a78a23b0" />
 
-# Generated Images - Public
+# Generated Public Images
 <img width="1920" height="862" alt="Screenshot 2026-01-04 231951" src="https://github.com/user-attachments/assets/dd3ed3b0-daa3-40b2-bd6e-c85b34cfb17f" />
 
 ---
