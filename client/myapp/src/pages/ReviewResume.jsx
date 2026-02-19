@@ -5,13 +5,14 @@ import { useState } from 'react';
 import axios from "axios";
 import toast from "react-hot-toast";
 import Markdown from 'react-markdown';
+import { useAuth } from "@clerk/clerk-react";
 
 function ReviewResume()  {
 
   const [input,setInput]= useState('');
   const [loading,setLoading]=useState(false)
   const [content,setContent]=useState('')
-
+  const { getToken } = useAuth();
   // const onSubmitHandler=async(e)=>{
   //         e.preventDefault();
   //   }
@@ -21,6 +22,7 @@ function ReviewResume()  {
 
         try{
               setLoading(true)
+              const token = await getToken();
 
               const formData=new FormData()
               formData.append('resume',input)
@@ -28,7 +30,10 @@ function ReviewResume()  {
               const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/ai/review-resume`,
                             formData,           
                                 {
-                                  withCredentials: true, 
+                                  // withCredentials: true, 
+                                  headers: {
+                                      Authorization: `Bearer ${token}`
+                                  }
                                 }
                             
                           ) 
