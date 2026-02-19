@@ -1,44 +1,28 @@
 import { clerkClient } from "@clerk/express";
-
 export const auth = async (req, res, next) => {
   try {
-     
-     if (!req.user) {
-      return res.status(200).json({
-        debug: "STEP 2 - req.user is UNDEFINED",
-        user: req.user
+
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        message: "User not authenticated",
       });
     }
 
-    if (!req.user.email) {
-      return res.status(200).json({
-        debug: "STEP 3 - email missing",
-        user: req.user
+    const email = req.user.emails?.[0]?.value;
+
+    if (!email) {
+      return res.status(401).json({
+        success: false,
+        message: "Email not found in Google profile",
       });
     }
-
-    return res.status(200).json({
-      debug: "STEP 4 - USER EXISTS",
-      email: req.user.email
-    });
-    // if (!req.user || !req.isAuthenticated()) {
-    //   return res.status(401).json({
-    //     success: false,
-    //     message: "Not authenticated",
-    //   });
-    // }
-     console.log("user authenticated");
-    console.log("🔍 Google user email:", req.user.email);
 
     const users = await clerkClient.users.getUserList({
-      emailAddress: [req.user.email],
+      emailAddress: [email],
     });
 
-    console.log("🔍 Clerk users found:", users.length);
-
-
     if (!users.length) {
-      console.log("inside try : no clerk users")
       return res.status(401).json({
         success: false,
         message: "Choose your plan (Free or Premium) to use the features of Aivora.",
@@ -47,6 +31,7 @@ export const auth = async (req, res, next) => {
 
     const clerkUser = users[0];
     const userId = clerkUser.id;
+
     const subscriptions = clerkUser.subscriptions || [];
 
     const hasPremiumPlan = subscriptions.some(
@@ -55,36 +40,15 @@ export const auth = async (req, res, next) => {
         sub.plan?.name?.toLowerCase() === "premium"
     );
 
-    let free_usage = clerkUser.privateMetadata?.free_usage;
-
-    if (!hasPremiumPlan) {
-      if (typeof free_usage !== "number") {
-        await clerkClient.users.updateUserMetadata(userId, {
-          privateMetadata: { free_usage: 0 },
-        });
-        free_usage = 0;
-      }
-    } else {
- 
-      free_usage = null;
-    }
-
     req.plan = hasPremiumPlan ? "premium" : "free";
-    req.free_usage = free_usage;
     req.userId = userId;
 
     next();
+
   } catch (error) {
-
-    return res.status(200).json({
-      debug: "STEP CATCH - ENTERED CATCH",
-      error: error.message
-    });
-   
-
     return res.status(401).json({
       success: false,
-      message: "Choose your plan (Free or Premium) to use the features of Aivora.",
+      message: error.message,
     });
   }
 };
