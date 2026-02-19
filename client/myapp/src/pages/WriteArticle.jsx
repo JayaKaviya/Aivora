@@ -5,10 +5,10 @@ import { useState } from 'react';
 import axios from "axios";
 import toast from "react-hot-toast";
 import Markdown from 'react-markdown';
-
+import { useAuth } from "@clerk/clerk-react";
 // axios.defaults.baseURL=import.meta.env.VITE_BASE_URL;
 
-function WriteArticle() {
+async function WriteArticle() {
   
   const articleLength=[
     {length:800,text:'Short (500-800 words)'},
@@ -19,6 +19,8 @@ function WriteArticle() {
   const [input,setInput]= useState('');
   const [loading,setLoading]=useState(false)
   const [content,setContent]=useState('')
+  const { getToken } = useAuth();
+  const token = await getToken();
   
   // const {getToken}= useAuth()
 
@@ -34,7 +36,10 @@ function WriteArticle() {
                             {prompt, length:selectedLength.length},
                             
                                 {
-                                  withCredentials: true, 
+                                  // withCredentials: true, 
+                                  headers: {
+                                      Authorization: `Bearer ${token}`
+                                  }
                                 }
                             
                           ) 
