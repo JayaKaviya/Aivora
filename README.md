@@ -1,4 +1,4 @@
-🚀 **Aivora – AI Content Creation Platform**
+## 🚀 Aivora – AI Content Creation Platform
 
 Aivora is a full-stack AI-powered web application that allows users to generate high-quality **articles, images, and creative content** using modern AI models. The platform provides authentication, content history, publishing controls, and a clean user experience.
 
