@@ -5,7 +5,7 @@ import { useState } from 'react';
 import axios from "axios";
 import toast from "react-hot-toast";
 import Markdown from 'react-markdown';
-
+import { useAuth } from "@clerk/clerk-react";
 
 function BlogTitle() {
 
@@ -18,6 +18,8 @@ function BlogTitle() {
   const [loading,setLoading]=useState(false)
   const [content,setContent]=useState('')
 
+    const { getToken } = useAuth();
+
   // const onSubmitHandler=async(e)=>{
   //         e.preventDefault();
   //   }
@@ -29,14 +31,17 @@ function BlogTitle() {
 
         try{
               setLoading(true)
-
+              const token = await getToken();
               const prompt=`Generate a blog title for the keyword ${input} in the category ${selectedCategory}`
 
               const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/ai/generate-blog-title`,
                             {prompt},
                             
                                 {
-                                  withCredentials: true, 
+                                  // withCredentials: true, 
+                                   headers: {
+                                      Authorization: `Bearer ${token}`
+                                  }
                                 }
                             
                           ) 
