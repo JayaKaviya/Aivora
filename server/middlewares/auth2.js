@@ -1,58 +1,73 @@
 import { clerkClient } from "@clerk/express";
+
 export const auth = async (req, res, next) => {
   try {
 
-    if (!req.user) {
-      return res.status(401).json({
-        success: false,
-        message: "User not authenticated",
+    // STEP 1
+    if (!req.auth) {
+      return res.status(200).json({
+        debug: "STEP 1 - req.auth missing"
       });
     }
 
-    const email = req.user.emails?.[0]?.value;
+    // STEP 2
+    const { userId, has } = await req.auth();
 
-    if (!email) {
-      return res.status(401).json({
-        success: false,
-        message: "Email not found in Google profile",
+    if (!userId) {
+      return res.status(200).json({
+        debug: "STEP 2 - userId missing",
+        userId
       });
     }
 
-    const users = await clerkClient.users.getUserList({
-      emailAddress: [email],
+    // STEP 3
+    const hasPremiumPlan = await has({ plan: "premium" });
+
+    return res.status(200).json({
+      debug: "STEP 3 - after has()",
+      userId,
+      hasPremiumPlan
     });
 
-    if (!users.length) {
-      return res.status(401).json({
-        success: false,
-        message: "Choose your plan (Free or Premium) to use the features of Aivora.",
-      });
+    // STEP 4
+    const user = await clerkClient.users.getUser(userId);
+
+    return res.status(200).json({
+      debug: "STEP 4 - got user",
+      privateMetadata: user.privateMetadata
+    });
+
+    // STEP 5
+    if (!hasPremiumPlan) {
+      if (typeof user.privateMetadata?.free_usage !== "number") {
+        await clerkClient.users.updateUserMetadata(userId, {
+          privateMetadata: { free_usage: 0 }
+        });
+
+        return res.status(200).json({
+          debug: "STEP 5 - metadata initialized"
+        });
+      }
     }
-
-    const clerkUser = users[0];
-    const userId = clerkUser.id;
-
-    const subscriptions = clerkUser.subscriptions || [];
-
-    const hasPremiumPlan = subscriptions.some(
-      (sub) =>
-        sub.status === "active" &&
-        sub.plan?.name?.toLowerCase() === "premium"
-    );
 
     req.plan = hasPremiumPlan ? "premium" : "free";
     req.userId = userId;
 
+    return res.status(200).json({
+      debug: "STEP 6 - before next()",
+      plan: req.plan
+    });
+
     next();
 
   } catch (error) {
-    return res.status(401).json({
-      success: false,
-      message: error.message,
+    return res.status(200).json({
+      debug: "CATCH BLOCK",
+      error: error.message,
+      stack: error.stack
     });
   }
 };
-
 
 export const isAuthenticated = (req, res, next) => {
   if (req.user && req.isAuthenticated()) return next();
