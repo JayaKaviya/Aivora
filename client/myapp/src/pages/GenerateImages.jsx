@@ -4,7 +4,7 @@ import { Sparkles, Image } from 'lucide-react';
 import { useState } from 'react';
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import { useAuth } from "@clerk/clerk-react";
 
 
 function GenerateImages() {
@@ -19,6 +19,8 @@ function GenerateImages() {
   const [loading,setLoading]=useState(false)
   const [content,setContent]=useState('')
 
+  const { getToken } = useAuth();
+
   // const onSubmitHandler=async(e)=>{
   //         e.preventDefault();
   //   }
@@ -29,13 +31,17 @@ function GenerateImages() {
 
         try{
               setLoading(true)
+              const token = await getToken();
 
               const prompt=`Generate an image of  ${input} in the style ${selectedStyle}`
 
               const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/ai/generate-image`,
                             {prompt,publish},
                             {
-                              withCredentials: true, 
+                              // withCredentials: true, 
+                               headers: {
+                                      Authorization: `Bearer ${token}`
+                                  }
                             }
                             
                           ) 
