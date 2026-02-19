@@ -3,10 +3,24 @@ import { clerkClient } from "@clerk/express";
 export const auth = async (req, res, next) => {
   try {
      
-     return res.status(200).json({
-      debug: "STEP 1 - ENTERED AUTH"
+     if (!req.user) {
+      return res.status(200).json({
+        debug: "STEP 2 - req.user is UNDEFINED",
+        user: req.user
+      });
+    }
+
+    if (!req.user.email) {
+      return res.status(200).json({
+        debug: "STEP 3 - email missing",
+        user: req.user
+      });
+    }
+
+    return res.status(200).json({
+      debug: "STEP 4 - USER EXISTS",
+      email: req.user.email
     });
-     
     // if (!req.user || !req.isAuthenticated()) {
     //   return res.status(401).json({
     //     success: false,
