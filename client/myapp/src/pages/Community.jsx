@@ -44,11 +44,16 @@ function Community({user}) {
 
    const imageLikeToggle=async (id)=>{
     try{
-       const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/user/toggle-like-creation`,
-        {id},
-        {
-          withCredentials: true, 
-        }
+
+        const token = await getToken();
+        const {data}=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/user/toggle-like-creation`,
+          {id},
+          {
+            // withCredentials: true, 
+            headers: {
+                      Authorization: `Bearer ${token}`
+            }
+          }
       )  
 
        if(data.success && data.message === 'Creation Liked')
