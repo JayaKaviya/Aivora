@@ -8,7 +8,7 @@ import Markdown from 'react-markdown';
 import { useAuth } from "@clerk/clerk-react";
 // axios.defaults.baseURL=import.meta.env.VITE_BASE_URL;
 
-async function WriteArticle() {
+function WriteArticle() {
   
   const articleLength=[
     {length:800,text:'Short (500-800 words)'},
@@ -19,8 +19,9 @@ async function WriteArticle() {
   const [input,setInput]= useState('');
   const [loading,setLoading]=useState(false)
   const [content,setContent]=useState('')
+
   const { getToken } = useAuth();
-  const token = await getToken();
+
   
   // const {getToken}= useAuth()
 
@@ -29,6 +30,7 @@ async function WriteArticle() {
 
         try{
               setLoading(true)
+              const token = await getToken();
 
               const prompt=`Write an article about ${input} in ${selectedLength.text}`
 
