@@ -5,20 +5,27 @@ import { useState,useEffect } from 'react';
 import { Heart } from 'lucide-react';
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "@clerk/clerk-react";
 
 function Community({user}) {
 
   const [creations,setCreations]=useState([]);
   const [loading,setLoading]=useState(true)
+  const { getToken } = useAuth();
 
 
   const fetchCreations=async()=>{
 
     try{
 
+       
+      const token = await getToken();
       const {data}=await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/get-published-creations`,
         {
-          withCredentials: true, 
+          // withCredentials: true, 
+          headers: {
+                                      Authorization: `Bearer ${token}`
+          }
         }
       )  
       if(data.success)
