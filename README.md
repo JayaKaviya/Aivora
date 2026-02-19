@@ -2,7 +2,7 @@
 
 Aivora is a full‑stack AI-powered web application that allows users to generate high-quality **articles, images, and creative content** using modern AI models. The platform provides authentication, content history, publishing controls, and a clean user experience. 
  ## 🌐 Live Demo
-🔗 https://aivorajk.vercel.app
+🔗 [Visit Aivora](https://aivorajk.vercel.app/)
 ---
 
 ## ✨ Features
