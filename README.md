@@ -1,7 +1,8 @@
 # 🚀 Aivora – AI Content Creation Platform
 
-Aivora is a full‑stack AI-powered web application that allows users to generate high-quality **articles, images, and creative content** using modern AI models. The platform provides authentication, content history, publishing controls, and a clean user experience.
-
+Aivora is a full‑stack AI-powered web application that allows users to generate high-quality **articles, images, and creative content** using modern AI models. The platform provides authentication, content history, publishing controls, and a clean user experience. 
+ ## 🌐 Live Demo
+🔗 https://aivorajk.vercel.app
 ---
 
 ## ✨ Features
@@ -197,21 +198,23 @@ http://localhost:5173
 
 ## AIVORA FEATURES 
 
-# Dashboard 
+# 1.Dashboard 
 
 <img width="1914" height="874" alt="Screenshot 2026-01-05 114538" src="https://github.com/user-attachments/assets/ded9d60b-0a41-4db0-bfe1-e9366ca98454" />
 <br/>
+<br/>
 <img width="1915" height="965" alt="image" src="https://github.com/user-attachments/assets/52ed2bbd-54df-43e2-8121-98bc3d3dfabf" />
+<br/>
 <br/>
 <img width="1918" height="872" alt="Screenshot 2026-01-05 114613" src="https://github.com/user-attachments/assets/f21e574d-ba16-49f9-829e-192e9d759cd8" />
 
-# Write Article 
+# 2.Write Article 
 <img width="1920" height="872" alt="Screenshot 2026-01-04 184747" src="https://github.com/user-attachments/assets/4999450c-a575-48c0-9d37-f319cc5d2e6f" />
 
-# Blog Title
+# 3.Blog Title
 <img width="1918" height="870" alt="Screenshot 2026-01-04 200833" src="https://github.com/user-attachments/assets/cedd0884-2180-4e52-8287-8c30a5019f4a" />
 
-# Generate Image in Premium Feature - Realistic
+# 4.Generate Image in Premium Feature - Realistic
 <img width="1920" height="835" alt="Screenshot 2026-01-04 202402" src="https://github.com/user-attachments/assets/fc03eaf8-5a47-4638-924d-517f39c3799e" /> 
 
 # Validation in Free Plan
@@ -220,25 +223,25 @@ http://localhost:5173
 # Generate Image in Premium Feature - Ghibli Style
 <img width="1920" height="834" alt="Screenshot 2026-01-04 203038" src="https://github.com/user-attachments/assets/fce696b9-e598-4be8-9858-2f6c5e56585b" />
 
-# Remove Background in Premium Feature 
+# 5.Remove Background in Premium Feature 
 <img width="1917" height="834" alt="Screenshot 2026-01-04 205703" src="https://github.com/user-attachments/assets/ed182d89-89a5-48df-9a11-3246831e92af" />
 
 # Validation in Free Plan
 <img width="1920" height="870" alt="Screenshot 2026-01-04 205510" src="https://github.com/user-attachments/assets/44692667-32fa-4ac5-8232-42dd4d334254" />
 
-# Remove Object 
+# 6.Remove Object 
 <img width="1912" height="839" alt="Screenshot 2026-01-04 210739" src="https://github.com/user-attachments/assets/88dfa5f4-637d-41f6-b8b5-9b0c644c1b79" />
 
 # Validation in Free Plan
 <img width="1919" height="870" alt="Screenshot 2026-01-04 211803" src="https://github.com/user-attachments/assets/93568eba-8134-41d4-b441-90597a05b136" />
 
-# Review Resume
+# 7.Review Resume
 <img width="1920" height="838" alt="Screenshot 2026-01-04 215901" src="https://github.com/user-attachments/assets/e8634481-0846-4fba-bee3-90de850e5116" />
 
 # Validation in Free Plan
 <img width="1920" height="867" alt="Screenshot 2026-01-04 215951" src="https://github.com/user-attachments/assets/a65dfad5-a215-40e9-9492-16f7a78a23b0" />
 
-# Generated Public Images
+# 8.Generated Public Images
 <img width="1920" height="862" alt="Screenshot 2026-01-04 231951" src="https://github.com/user-attachments/assets/dd3ed3b0-daa3-40b2-bd6e-c85b34cfb17f" />
 
 ---
