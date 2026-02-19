@@ -2,8 +2,11 @@ import { clerkClient } from "@clerk/express";
 
 export const auth = async (req, res, next) => {
   try {
-  
-      console.log("AUTH MIDDLEWARE HIT");
+     
+     return res.status(200).json({
+      debug: "STEP 1 - ENTERED AUTH"
+    });
+     
     // if (!req.user || !req.isAuthenticated()) {
     //   return res.status(401).json({
     //     success: false,
@@ -58,7 +61,12 @@ export const auth = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.error("AUTH ERROR:", error.message);
+
+    return res.status(200).json({
+      debug: "STEP CATCH - ENTERED CATCH",
+      error: error.message
+    });
+   
 
     return res.status(401).json({
       success: false,
