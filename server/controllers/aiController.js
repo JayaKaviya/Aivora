@@ -154,7 +154,8 @@ export const generateImage=async(req,res)=>{
                 {
                     headers:{'x-api-key': process.env.CLIPDROP_API_KEY,},
                     responseType: 'arraybuffer'
-            })
+                }
+            )
 
             const base64Image=`data:image/png;base64,${Buffer.from(data, 'binary').toString('base64')}`;
             

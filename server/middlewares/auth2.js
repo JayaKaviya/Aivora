@@ -6,9 +6,9 @@ export const auth = async (req, res, next) => {
     const { userId, has } = await req.auth();
 
     if (!userId) {
-      return res.status(401).json({
+      return res.status(403).json({
         success: false,
-        message: "Not authenticated"
+        message: "No plan selected"
       });
     }
 
@@ -17,6 +17,7 @@ export const auth = async (req, res, next) => {
 
     if (!hasPremiumPlan && user.privateMetadata?.free_usage !== undefined) {
       req.free_usage = user.privateMetadata.free_usage;
+    
     } else {
       await clerkClient.users.updateUserMetadata(userId, {
         privateMetadata: { free_usage: 0 }
