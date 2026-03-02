@@ -10,8 +10,6 @@ import Footer from '../components/Footer'
 function Home(userDetails) {
 
   const user=userDetails.user;
-
-
   return (
     <div >
       <Navbar/>

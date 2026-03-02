@@ -34,12 +34,9 @@ function App() {
 
 		} catch (err) {
         const status = err.response?.status;
-
         if (status === 401 || status === 403) {
-          // normal unauthenticated state
           return;
         }
-
         console.error("Unexpected error fetching user:", err);
   }
 	};
@@ -50,7 +47,6 @@ function App() {
 
   return (
     <div className="container">
-          {/* <div className="hello-text">hello</div>  */}
           <Toaster />
           <BrowserRouter>
               <Routes>
@@ -58,7 +54,7 @@ function App() {
                   {/* <Route path="/login" element={user ? <Navigate to="/" /> : <Login />}/>
                   <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />}  /> */}
 
-                   <Route path="/auth" element={user ? <Navigate to="/" /> : <Auth />}  />
+                  <Route path="/auth" element={user ? <Navigate to="/" /> : <Auth />}  />
 
                   <Route path="/profile"  element={user ? <Profile user={user} /> : <Navigate to="/auth"/>}  />
                   <Route path='/ai' element={ user ? <Layout user={user}/> : <Navigate to="/auth"/>}>
