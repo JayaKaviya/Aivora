@@ -34,19 +34,16 @@ const Sidebar = ({ user, sidebar, setSidebar }) => {
                 e.target.src = "/aivora.png"; 
               }} 
              className='avatar'
-              />
+            />
             <h2 className='user_name'>{user?.name}</h2>
             <div className='sidebar-section'>
               {navItems.map(({to, label, Icon})=>(
-
                   <NavLink key={to} to={to} end={to ==='/ai'}
                       onClick={()=>setSidebar(false)} 
-                      className={({isActive})=>isActive ? "sidebar-link active" : "sidebar-link" }>
-                    
+                      className={({isActive})=>isActive ? "sidebar-link active" : "sidebar-link" }>              
                       {({isActive})=>(
                         <>
-                          <Icon  className={isActive ? "icon icon-active" : "icon"}
-                            />
+                          <Icon  className={isActive ? "icon icon-active" : "icon"}/>
                             {label}
                         </>
                       )}
@@ -55,9 +52,8 @@ const Sidebar = ({ user, sidebar, setSidebar }) => {
             </div>
         </div>
         <div className='sidebar-footer'>
-           <div className="user-profile" 
-          //  onClick={openUserProfile}
-           >
+           <div className="user-profile" >
+          {/* //  onClick={openUserProfile} */}     
                   <img src={user.picture} alt="User Avatar" className="user-avatar"/>
                   <div>
                       <h1 className="user-name">{user.name}</h1>

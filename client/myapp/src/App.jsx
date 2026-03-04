@@ -55,7 +55,6 @@ function App() {
                   <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />}  /> */}
 
                   <Route path="/auth" element={user ? <Navigate to="/" /> : <Auth />}  />
-
                   <Route path="/profile"  element={user ? <Profile user={user} /> : <Navigate to="/auth"/>}  />
                   <Route path='/ai' element={ user ? <Layout user={user}/> : <Navigate to="/auth"/>}>
                         <Route index element={<Dashboard/>}/>
